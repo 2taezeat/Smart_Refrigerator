@@ -1,4 +1,4 @@
-package wikibook.learnandroid.smart_refrigerator.ui.notifications
+package wikibook.learnandroid.smart_refrigerator.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
