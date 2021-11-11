@@ -36,9 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -46,6 +44,13 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each`
         // menu should be considered as top level destinations.
+
+        val toolBar = binding.mainToolbar
+        setSupportActionBar(toolBar)
+
+
+
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
@@ -55,10 +60,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-
-
-
         setPermission() // 권한을 체크하는 메소드
 
         binding.fab.setOnClickListener{
@@ -67,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
     // 카메라 촬영
     private fun takeCapture() {

@@ -7,15 +7,28 @@
     android:layout_height="match_parent">
 
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.9"
+        app:layout_constraintHeight_percent="0.82"
         android:id="@+id/main_activity_main_cl"
-        android:background="@color/grey"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_activity_bottom_cl"
         >
-
 
         <fragment
             android:id="@+id/nav_host_fragment_activity_main"
