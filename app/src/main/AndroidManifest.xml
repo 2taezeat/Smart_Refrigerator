@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- 파일 읽기 권한 -->
     <uses-permission android:name="android.permission.CAMERA" /> <!--카메라 권한 -->
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 
 
     <application
@@ -26,6 +28,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".FirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+
 
         <provider
             android:authorities="wikibook.learnandroid.smart_refrigerator.fileprovider"

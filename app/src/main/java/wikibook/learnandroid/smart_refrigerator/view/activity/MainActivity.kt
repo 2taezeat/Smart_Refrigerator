@@ -1,6 +1,7 @@
 package wikibook.learnandroid.smart_refrigerator.view.activity
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -9,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -17,7 +19,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import wikibook.learnandroid.smart_refrigerator.R
@@ -49,8 +53,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolBar)
 
 
-
-
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
@@ -61,14 +63,23 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         setPermission() // 권한을 체크하는 메소드
-
         binding.fab.setOnClickListener{
             Toast.makeText(this, "fab-test", Toast.LENGTH_SHORT).show()
             takeCapture() // 기본 카메라 앱을 실행하여 사진 촬여
         }
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.d(TAG, "Fetching FCM registration token failed" )
+                return@OnCompleteListener
+            }
+            val token = task.result
+
+            // Log and toast
+            val msg = getString(R.string.msg_token_fmt, token)
+            Log.d("hello", msg)
+        })
 
     }
-
 
 
     // 카메라 촬영
