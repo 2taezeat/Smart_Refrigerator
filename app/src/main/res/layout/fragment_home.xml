@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.HomeFragment">
 
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="452dp"
+        android:id="@+id/home_imageview"
+        android:src="@drawable/raw_refrigerator_drawing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        >
+
+    </ImageView>
+
     <TextView
         android:id="@+id/text_home"
         android:layout_width="match_parent"
