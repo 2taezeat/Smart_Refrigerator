@@ -34,8 +34,8 @@ class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.CustomVie
     }
 
     override fun onBindViewHolder(viewHolder: CustomViewHolder, i: Int) {
-        viewHolder.notificationsCardviewBinding.itemTitle.text = titles[i]
-        viewHolder.notificationsCardviewBinding.itemDetail.text = details[i]
+        viewHolder.notificationsCardviewBinding.notificationText.text = titles[i]
+        viewHolder.notificationsCardviewBinding.notificationText.text = details[i]
         //viewHolder.notificationsCardviewBinding.itemImage.setImageResource(images[i])
     }
 
