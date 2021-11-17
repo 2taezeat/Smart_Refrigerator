@@ -13,7 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBinding
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
+import wikibook.learnandroid.smart_refrigerator.view.activity.MainActivity
 import wikibook.learnandroid.smart_refrigerator.viewmodels.DashboardViewModel
+
+
+
 
 class DashboardFragment : Fragment() {
 
@@ -59,15 +63,20 @@ class DashboardFragment : Fragment() {
                     BottomDialogShow.refrigeratorBottomDialogFragmentShow(fragmentManager)
                     true
                 }
+                R.id.dashboard_menu_image_append -> {
+                    var photoPickerIntent = Intent(Intent.ACTION_PICK)
+                    photoPickerIntent.type = "image/*"
+                    startForResult.launch(Intent.createChooser(photoPickerIntent,"photoPicker"))
+                    true
+                }
+                R.id.dashboard_menu_camera -> {
+                    (lazyActivity as MainActivity).takeCapture()
+                    true
+                }
+
                 else -> false
             }
         }
-
-
-        var photoPickerIntent = Intent(Intent.ACTION_PICK)
-        photoPickerIntent.type = "image/*"
-        startForResult.launch(Intent.createChooser(photoPickerIntent,"photoPicker"))
-
 
         return root
     }

@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity() {
 
 //        val toolBar = binding.mainToolbar
 //        setSupportActionBar(toolBar)
-
-
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(
 //                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
@@ -61,18 +59,13 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         setPermission() // 권한을 체크하는 메소드
-        binding.fab.setOnClickListener{
-            Toast.makeText(this, "fab-test", Toast.LENGTH_SHORT).show()
-            takeCapture() // 기본 카메라 앱을 실행하여 사진 촬여
-        }
+
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.d(TAG, "Fetching FCM registration token failed" )
                 return@OnCompleteListener
             }
             val token = task.result
-
-            // Log and toast
             val msg = getString(R.string.msg_token_fmt, token)
             Log.d("hello", msg)
         })
@@ -81,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // 카메라 촬영
-    private fun takeCapture() {
+    fun takeCapture() {
         // 기본 카메라 앱 실행
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
@@ -103,9 +96,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     // 이미지 파일 생성
-    private fun createImageFile(): File? {
+    fun createImageFile(): File? {
         val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir : File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile("JPEG_${timeStamp}_", "jpg", storageDir)
@@ -116,17 +108,14 @@ class MainActivity : AppCompatActivity() {
 
 
     // ted permission setting
-    private fun setPermission() {
+    fun setPermission() {
         val permission = object : PermissionListener {
             override fun onPermissionGranted() { // 설정해놓은 위험권한들이 허용 되었을 경우 수행됨
-                Toast.makeText(this@MainActivity, "권한이 허가되었습니다.", Toast.LENGTH_SHORT).show()
-
+                Toast.makeText(this@MainActivity, "Permission Allowed!", Toast.LENGTH_SHORT).show()
             }
-
             override fun onPermissionDenied(deniedPermissions: MutableList<String>?) { // 설정해놓은 위험권한들 중 거부를 한 경우 이곳을 수행함.
-                Toast.makeText(this@MainActivity, "권한이 허가되지 않았습니다", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "Permission Denied", Toast.LENGTH_SHORT).show()
             }
-
         }
         TedPermission.with(this)
             .setPermissionListener(permission)
@@ -157,7 +146,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 갤러리에 사진 저장
-   private fun savePhoto(bitmap: Bitmap) {
+   fun savePhoto(bitmap: Bitmap) {
         val folderPath = Environment.getExternalStorageDirectory().absolutePath + "/Pictures/" // 사진 폴더로 저장하기 위한 경로 선언
         val timeStamp : String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val fileName = "${timeStamp}.jpeg"
