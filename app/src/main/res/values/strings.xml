@@ -13,4 +13,14 @@
     <string name="shelf_life">Shelf Life</string>
     <string name="purchasing_time">Purchasing Time</string>
     <string name="storing_time">Storing Time</string>
+    <string name="refrigerator">Refrigerator</string>
+    <string name="search">Search</string>
+    <string name="synchronization">Synchronization</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="refresh">Refresh</string>
+    <string name="image_append">Image Append</string>
+    <string name="camera">Camera</string>
+    <string name="upload">Upload</string>
+
 </resources>

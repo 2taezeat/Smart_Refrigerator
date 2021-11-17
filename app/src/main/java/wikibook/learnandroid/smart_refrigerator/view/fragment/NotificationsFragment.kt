@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.NotificationAdapter
@@ -37,11 +36,28 @@ class NotificationsFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications,container,false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textNotifications
+//        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
 
+//        binding.notificationToolbar.setNavigationIcon(R.drawable.ic_baseline_kitchen_24)
+//
+//        binding.notificationToolbar.setNavigationOnClickListener { view ->
+//            // Navigate somewhere
+//        }
+
+        binding.notificationToolbar.inflateMenu(R.menu.notification_toolbar_menu)
+
+        binding.notificationToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.notification_menu_refrigerator -> {
+                    Toast.makeText( lazyContext,"hello", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
 
         val notificationRecyclerview = binding.notificationRecyclerview
         notificationRecyclerview.layoutManager = LinearLayoutManager(lazyContext)

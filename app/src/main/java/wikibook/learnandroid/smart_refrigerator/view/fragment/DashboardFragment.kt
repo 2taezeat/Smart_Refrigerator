@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBinding
 import wikibook.learnandroid.smart_refrigerator.viewmodels.DashboardViewModel
 
@@ -24,7 +25,7 @@ class DashboardFragment : Fragment() {
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
             var imageUrl = it.data?.data
-            binding.dashboardFragmentIV1.setImageURI(imageUrl)
+            //binding.dashboardFragmentIV1.setImageURI(imageUrl)
         }
     }
 
@@ -44,6 +45,8 @@ class DashboardFragment : Fragment() {
 //        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
+
+        binding.dashboardToolbar.inflateMenu(R.menu.dashboard_toolbar_menu)
 
         var photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"

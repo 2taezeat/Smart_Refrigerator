@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.FileProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -49,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each`
         // menu should be considered as top level destinations.
 
-        val toolBar = binding.mainToolbar
-        setSupportActionBar(toolBar)
+//        val toolBar = binding.mainToolbar
+//        setSupportActionBar(toolBar)
 
 
         val appBarConfiguration = AppBarConfiguration(
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         setPermission() // 권한을 체크하는 메소드

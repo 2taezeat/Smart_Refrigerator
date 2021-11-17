@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/dashboard_menu_upload"
+        android:icon="@drawable/ic_baseline_cloud_upload_24"
+        android:title="@string/upload"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/dashboard_menu_image_append"
+        android:icon="@drawable/ic_baseline_image_24"
+        android:title="@string/image_append"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/dashboard_menu_camera"
+        android:icon="@drawable/ic_baseline_photo_camera_24"
+        android:title="@string/camera"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/dashboard_menu_refrigerator"
+        android:icon="@drawable/ic_baseline_kitchen_24"
+        android:title="@string/refrigerator"
+        app:showAsAction="always"
+        />
+
+</menu>

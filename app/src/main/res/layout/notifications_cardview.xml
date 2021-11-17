@@ -15,7 +15,6 @@
         android:id="@+id/notification_cardViewMain"
         android:layout_margin="4dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
         app:contentPadding="10dp"
         android:foreground="?selectableItemBackground"
         android:clickable="true" >
@@ -44,7 +43,8 @@
                 android:textColor="@color/black"
                 android:hint="asdihuasiudhasdaisdhaisduhuaisaiusdhiasdhuaisdhaiusd"
                 android:layout_marginStart="20dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                android:fontFamily="@font/notosans_regular"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
             </TextView>
