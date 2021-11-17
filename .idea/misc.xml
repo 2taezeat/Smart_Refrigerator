@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.11" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_refrigerator_bottom_dialog.xml" value="0.1667763157894737" />
         <entry key="app/src/main/res/layout/home_items.xml" value="0.165" />
         <entry key="app/src/main/res/layout/notifications_cardview.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.15493421052631579" />

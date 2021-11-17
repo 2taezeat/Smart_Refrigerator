@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentHomeBinding
+import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.viewmodels.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -18,6 +20,9 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val lazyActivity by lazy {
+        requireActivity()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +41,16 @@ class HomeFragment : Fragment() {
 //        })
 
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
+        binding.homeToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.home_menu_refrigerator -> {
+                    val fragmentManager: FragmentManager = lazyActivity.supportFragmentManager
+                    BottomDialogShow.refrigeratorBottomDialogFragmentShow(fragmentManager)
+                    true
+                }
+                else -> false
+            }
+        }
 
         return root
     }

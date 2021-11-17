@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBinding
+import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.viewmodels.DashboardViewModel
 
 class DashboardFragment : Fragment() {
@@ -21,6 +23,9 @@ class DashboardFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val lazyActivity by lazy {
+        requireActivity()
+    }
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
@@ -47,6 +52,17 @@ class DashboardFragment : Fragment() {
 //        })
 
         binding.dashboardToolbar.inflateMenu(R.menu.dashboard_toolbar_menu)
+        binding.dashboardToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.dashboard_menu_refrigerator -> {
+                    val fragmentManager: FragmentManager = lazyActivity.supportFragmentManager
+                    BottomDialogShow.refrigeratorBottomDialogFragmentShow(fragmentManager)
+                    true
+                }
+                else -> false
+            }
+        }
+
 
         var photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"

@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.NotificationAdapter
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentNotificationsBinding
+import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.viewmodels.NotificationsViewModel
 
 class NotificationsFragment : Fragment() {
@@ -22,8 +23,8 @@ class NotificationsFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val lazyContext by lazy {
-        requireContext()
+    private val lazyActivity by lazy {
+        requireActivity()
     }
 
     override fun onCreateView(
@@ -52,7 +53,8 @@ class NotificationsFragment : Fragment() {
         binding.notificationToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.notification_menu_refrigerator -> {
-                    Toast.makeText( lazyContext,"hello", Toast.LENGTH_SHORT).show()
+                    val fragmentManager: FragmentManager = lazyActivity.supportFragmentManager
+                    BottomDialogShow.refrigeratorBottomDialogFragmentShow(fragmentManager)
                     true
                 }
                 else -> false
@@ -60,7 +62,7 @@ class NotificationsFragment : Fragment() {
         }
 
         val notificationRecyclerview = binding.notificationRecyclerview
-        notificationRecyclerview.layoutManager = LinearLayoutManager(lazyContext)
+        notificationRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
         notificationRecyclerview.adapter = NotificationAdapter()
 
 
