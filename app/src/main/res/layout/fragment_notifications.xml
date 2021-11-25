@@ -40,7 +40,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="54dp"
             android:background="@color/purple_500"
-            android:elevation="20dp"
             >
 
         </View>
