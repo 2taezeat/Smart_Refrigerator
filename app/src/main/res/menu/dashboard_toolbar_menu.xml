@@ -12,7 +12,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/dashboard_menu_image_append"
-        android:icon="@drawable/ic_baseline_image_24"
+        android:icon="@drawable/ic_baseline_image_search_24"
         android:title="@string/image_append"
         app:showAsAction="always"
         />

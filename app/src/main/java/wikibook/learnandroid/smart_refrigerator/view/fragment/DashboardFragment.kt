@@ -3,6 +3,7 @@ package wikibook.learnandroid.smart_refrigerator.view.fragment
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.tabs.TabLayout
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBinding
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.view.activity.MainActivity
 import wikibook.learnandroid.smart_refrigerator.viewmodels.DashboardViewModel
+
+
+
 
 
 
@@ -78,6 +83,31 @@ class DashboardFragment : Fragment() {
             }
         }
 
+
+
+        binding.dashboardTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                Log.d("onTabSelected","${tab}")
+                val pos = tab!!.position
+                changeView(pos)
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                Log.d("onTabReselected","${tab}")
+                val pos = tab!!.position
+                changeView(pos)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                Log.d("onTabUnselected","${tab}")
+                val pos = tab!!.position
+                changeView(pos)
+            }
+        })
+
+
+
         return root
     }
 
@@ -85,5 +115,18 @@ class DashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun changeView(index: Int) {
+        when (index) {
+            0 -> {
+                binding.dashboardAddCl.visibility = View.VISIBLE
+                binding.dashboardEditCl.visibility = View.INVISIBLE
+            }
+            1 -> {
+                binding.dashboardAddCl.visibility = View.INVISIBLE
+                binding.dashboardEditCl.visibility = View.VISIBLE
+            }
+        }
     }
 }
