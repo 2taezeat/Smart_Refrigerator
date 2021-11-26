@@ -48,6 +48,16 @@ class HomeFragment : Fragment() {
                     BottomDialogShow.refrigeratorBottomDialogFragmentShow(fragmentManager)
                     true
                 }
+                R.id.home_menu_search -> {
+                    if (binding.homeSearchCl.visibility == View.VISIBLE) {
+                        binding.homeSearchCl.visibility = View.GONE
+                    } else {
+                        binding.homeSearchCl.visibility = View.VISIBLE
+                    }
+
+                    true
+                }
+
                 else -> false
             }
         }

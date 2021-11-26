@@ -40,6 +40,41 @@
             >
         </View>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.95"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.24"
+            android:id="@+id/home_search_cl"
+            android:background="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_toolbar"
+            android:visibility="visible"
+            >
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.95"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.67"
+            android:id="@+id/home_content_cl"
+            android:background="@color/grey_e1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_search_cl"
+            >
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -12,5 +12,7 @@
     <color name="grey_e1">#E1E1E1</color>
     <color name="grey_ef">#EFEFEF</color>
     <color name="purple_100">#F7F0FF</color>
+    <color name="hint_color">#808080</color>
+
 
 </resources>
