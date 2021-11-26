@@ -127,7 +127,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintWidth_percent="0.37"
+                    app:layout_constraintWidth_percent="0.38"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:helperText="* Required"
@@ -139,6 +139,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:hint="@string/location"
+                        android:fontFamily="@font/notosans_regular"
                         android:id="@+id/dashboard_edittext_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -147,7 +148,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintWidth_percent="0.37"
+                    app:layout_constraintWidth_percent="0.38"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:startIconDrawable="@drawable/outline_numbers_24"
@@ -162,6 +163,7 @@
                         android:id="@+id/dashboard_edittext_count"
                         android:inputType="numberDecimal"
                         android:layout_width="match_parent"
+                        android:fontFamily="@font/notosans_regular"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -195,6 +197,7 @@
                         android:id="@+id/dashboard_edittext_kind"
                         android:layout_width="match_parent"
                         android:focusable="true"
+                        android:fontFamily="@font/notosans_regular"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -206,11 +209,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.05"
+                    app:layout_constraintVertical_bias="0.06"
                     android:text="Use AI Solution"
                     android:layoutDirection="rtl"
-                    android:textColor="@color/hint_color"
+                    android:textSize="15sp"
+                    android:textColor="#696969"
                     android:buttonTint="@color/purple_500"
+                    android:fontFamily="@font/notosans_regular"
                     />
 
 
@@ -230,6 +235,7 @@
                         android:hint="@string/shelf_life"
                         android:id="@+id/dashboard_edittext_shelflife"
                         android:inputType="date"
+                        android:fontFamily="@font/notosans_regular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -250,6 +256,7 @@
                         android:hint="@string/purchasing_time"
                         android:id="@+id/dashboard_edittext_purchasingtime"
                         android:inputType="date"
+                        android:fontFamily="@font/notosans_regular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -271,6 +278,7 @@
                         android:hint="@string/memo"
                         android:id="@+id/dashboard_edittext_memo"
                         android:inputType="text"
+                        android:fontFamily="@font/notosans_regular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>

@@ -7,6 +7,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.3250975292587776" />
+        <entry key="../../../../layout/custom_preview.xml" value="0.2093628088426528" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1723684210526316" />
         <entry key="app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.16513157894736843" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.21447368421052632" />
@@ -20,19 +21,22 @@
         <entry key="app/src/main/res/drawable/ic_baseline_note_24.xml" value="0.18157894736842106" />
         <entry key="app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.18157894736842106" />
         <entry key="app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.18157894736842106" />
+        <entry key="app/src/main/res/drawable/ic_baseline_sort_24.xml" value="0.25526315789473686" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.18157894736842106" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.18881578947368421" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.18157894736842106" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.16973684210526316" />
         <entry key="app/src/main/res/drawable/imageview_border.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/outline_numbers_24.xml" value="0.18157894736842106" />
+        <entry key="app/src/main/res/drawable/textview_border.xml" value="0.25526315789473686" />
         <entry key="app/src/main/res/drawable/toolbar_menu.xml" value="0.16644736842105262" />
         <entry key="app/src/main/res/font/font.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/dashboard_edit_view.xml" value="0.16885964912280702" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.10866851806640626" />
-        <entry key="app/src/main/res/layout/fragment_refrigerator_bottom_dialog.xml" value="0.1667763157894737" />
+        <entry key="app/src/main/res/layout/fragment_refrigerator_bottom_dialog.xml" value="0.165" />
         <entry key="app/src/main/res/layout/home_items.xml" value="0.1" />
         <entry key="app/src/main/res/layout/notifications_cardview.xml" value="0.25" />
         <entry key="app/src/main/res/layout/test.xml" value="0.25" />
