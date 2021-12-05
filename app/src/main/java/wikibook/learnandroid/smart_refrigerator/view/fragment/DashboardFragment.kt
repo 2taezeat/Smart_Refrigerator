@@ -1,6 +1,8 @@
 package wikibook.learnandroid.smart_refrigerator.view.fragment
 
 import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,11 +19,7 @@ import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBin
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.view.activity.MainActivity
 import wikibook.learnandroid.smart_refrigerator.viewmodels.DashboardViewModel
-
-
-
-
-
+import java.util.*
 
 
 class DashboardFragment : Fragment() {
@@ -85,8 +83,29 @@ class DashboardFragment : Fragment() {
 
 
 
-        binding.dashboardTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.dashboardEdittextShelflife.setOnClickListener{
+            val cal = Calendar.getInstance()
+            val dateSetListener = OnDateSetListener { view, year, month, dayOfMonth ->
+                val shelfLifeDateString = "${year}/${month+1}/${dayOfMonth}"
+                binding.dashboardEdittextShelflife.setText(shelfLifeDateString)
+            }
+            DatePickerDialog(lazyActivity, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
 
+
+        binding.dashboardEdittextPurchasingtime.setOnClickListener{
+            val cal = Calendar.getInstance()
+            val dateSetListener = OnDateSetListener { view, year, month, dayOfMonth ->
+                val purchasingTimeDateString = "${year}/${month+1}/${dayOfMonth}"
+                binding.dashboardEdittextPurchasingtime.setText(purchasingTimeDateString)
+            }
+            DatePickerDialog(lazyActivity, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
+
+
+
+        binding.dashboardTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("onTabSelected","${tab}")
                 val pos = tab!!.position
