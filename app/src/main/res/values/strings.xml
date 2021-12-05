@@ -23,5 +23,6 @@
     <string name="camera">Camera</string>
     <string name="upload">Upload</string>
     <string name="delete">Delete</string>
+    <string name="update_time">Update Time</string>
 
 </resources>

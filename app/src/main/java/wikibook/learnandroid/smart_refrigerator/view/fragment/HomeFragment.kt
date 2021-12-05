@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -43,9 +44,6 @@ class HomeFragment : Fragment() {
 //        })
 
         val homeContentLayout = binding.homeContentCl
-        //val params: ViewGroup.LayoutParams = homeContentLayout.layoutParams
-
-
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
         binding.homeToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -78,15 +76,22 @@ class HomeFragment : Fragment() {
 
 
 
+
         val homeRecyclerview = binding.homeRecyclerview
         homeRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
         homeRecyclerview.adapter = HomeAdapter()
 
 
+        val sortMenus = listOf("Shelf Life", "Update Time")
+        val sortAdapter = ArrayAdapter(lazyActivity, R.layout.sort_item, sortMenus)
+        binding.homeSortAutoTextview.setAdapter(sortAdapter)
+
         return root
     }
 
 
+
+//    }
 
 
     override fun onDestroyView() {

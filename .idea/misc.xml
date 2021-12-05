@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/drawable/toolbar_menu.xml" value="0.16644736842105262" />
         <entry key="app/src/main/res/font/font.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/asd.xml" value="0.33596491228070174" />
         <entry key="app/src/main/res/layout/dashboard_edit_cardview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dashboard_edit_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.67" />
@@ -43,9 +44,11 @@
         <entry key="app/src/main/res/layout/home_cardview.xml" value="0.22" />
         <entry key="app/src/main/res/layout/home_items.xml" value="0.1" />
         <entry key="app/src/main/res/layout/notifications_cardview.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/sort_item.xml" value="0.33596491228070174" />
         <entry key="app/src/main/res/layout/test.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.15493421052631579" />
         <entry key="app/src/main/res/menu/dashboard_toolbar_menu.xml" value="0.17861842105263157" />
+        <entry key="app/src/main/res/menu/home_sort_menu.xml" value="0.33596491228070174" />
         <entry key="app/src/main/res/menu/home_toolbar_menu.xml" value="0.2042763157894737" />
         <entry key="app/src/main/res/menu/notification_toolbar_menu.xml" value="0.13289473684210526" />
         <entry key="app/src/main/res/xml/file_paths.xml" value="0.11644736842105263" />
