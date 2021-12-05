@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ebookfrenzy.carddemo.HomeAdapter
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentHomeBinding
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
@@ -40,6 +42,10 @@ class HomeFragment : Fragment() {
 //            textView.text = it
 //        })
 
+        val homeContentLayout = binding.homeContentCl
+        //val params: ViewGroup.LayoutParams = homeContentLayout.layoutParams
+
+
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
         binding.homeToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -51,8 +57,16 @@ class HomeFragment : Fragment() {
                 R.id.home_menu_search -> {
                     if (binding.homeSearchCl.visibility == View.VISIBLE) {
                         binding.homeSearchCl.visibility = View.GONE
+                        //val homeContentLayout = binding.homeContentCl
+                        val params: ViewGroup.LayoutParams = homeContentLayout.layoutParams
+                        params.height = 1800
+                        homeContentLayout.layoutParams = params
                     } else {
                         binding.homeSearchCl.visibility = View.VISIBLE
+                        //val homeContentLayout = binding.homeContentCl
+                        val params: ViewGroup.LayoutParams = homeContentLayout.layoutParams
+                        params.height = 1300
+                        homeContentLayout.layoutParams = params
                     }
 
                     true
@@ -61,6 +75,13 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
+
+
+
+        val homeRecyclerview = binding.homeRecyclerview
+        homeRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
+        homeRecyclerview.adapter = HomeAdapter()
+
 
         return root
     }

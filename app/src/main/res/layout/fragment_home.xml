@@ -294,14 +294,23 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.95"
-            android:layout_height="0dp"
+            android:layout_height="470dp"
+            app:layout_constraintWidth_percent="1"
             app:layout_constraintHeight_percent="0.67"
+            android:layout_marginBottom="100dp"
             android:id="@+id/home_content_cl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_search_cl"
             >
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/home_recyclerview"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
