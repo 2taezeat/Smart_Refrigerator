@@ -22,5 +22,6 @@
     <string name="image_append">Image Append</string>
     <string name="camera">Camera</string>
     <string name="upload">Upload</string>
+    <string name="delete">Delete</string>
 
 </resources>

@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.16513157894736843" />
         <entry key="app/src/main/res/drawable/ic_baseline_category_24.xml" value="0.16513157894736843" />
         <entry key="app/src/main/res/drawable/ic_baseline_cloud_upload_24.xml" value="0.18157894736842106" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.29342105263157897" />
         <entry key="app/src/main/res/drawable/ic_baseline_fingerprint_24.xml" value="0.21447368421052632" />
         <entry key="app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.18157894736842106" />
         <entry key="app/src/main/res/drawable/ic_baseline_kitchen_24.xml" value="0.18157894736842106" />
@@ -32,6 +33,7 @@
         <entry key="app/src/main/res/drawable/toolbar_menu.xml" value="0.16644736842105262" />
         <entry key="app/src/main/res/font/font.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/dashboard_edit_cardview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dashboard_edit_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.335" />

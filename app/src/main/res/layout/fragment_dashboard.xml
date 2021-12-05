@@ -64,14 +64,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="0dp"
         app:layout_constraintHeight_percent="0.83"
-        android:id="@+id/dashboard_main_cl"
+        android:id="@+id/dashboard_main_add_cl"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_tab_layout"
+        android:visibility="visible"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/dashboard_add_cl"
+            android:visibility="visible"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -198,6 +200,7 @@
                         android:layout_width="match_parent"
                         android:focusable="true"
                         android:fontFamily="@font/notosans_regular"
+                        android:textColor="@color/black"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -206,6 +209,7 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/dashboard_use_ai_checkbox"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -288,26 +292,40 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.83"
+        android:id="@+id/dashboard_main_edit_cl"
+        android:background="@color/grey"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_tab_layout"
+        >
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/dashboard_edit_cl"
-            android:visibility="invisible"
             >
-            <TextView
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/edit"
-                android:id="@+id/text_edit"
+                android:id="@+id/dashboard_editing_recyclerview"
                 >
-
-            </TextView>
+            </androidx.recyclerview.widget.RecyclerView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

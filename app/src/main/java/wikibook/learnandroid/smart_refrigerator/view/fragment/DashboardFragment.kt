@@ -13,6 +13,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ebookfrenzy.carddemo.DashboardEditingAdapter
 import com.google.android.material.tabs.TabLayout
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBinding
@@ -127,6 +129,12 @@ class DashboardFragment : Fragment() {
 
 
 
+        val dashBoardEditingRecyclerview = binding.dashboardEditingRecyclerview
+        dashBoardEditingRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
+        dashBoardEditingRecyclerview.adapter = DashboardEditingAdapter()
+
+
+
         return root
     }
 
@@ -139,12 +147,12 @@ class DashboardFragment : Fragment() {
     private fun changeView(index: Int) {
         when (index) {
             0 -> {
-                binding.dashboardAddCl.visibility = View.VISIBLE
-                binding.dashboardEditCl.visibility = View.INVISIBLE
+                binding.dashboardMainAddCl.visibility = View.VISIBLE
+                binding.dashboardMainEditCl.visibility = View.INVISIBLE
             }
             1 -> {
-                binding.dashboardAddCl.visibility = View.INVISIBLE
-                binding.dashboardEditCl.visibility = View.VISIBLE
+                binding.dashboardMainAddCl.visibility = View.INVISIBLE
+                binding.dashboardMainEditCl.visibility = View.VISIBLE
             }
         }
     }
