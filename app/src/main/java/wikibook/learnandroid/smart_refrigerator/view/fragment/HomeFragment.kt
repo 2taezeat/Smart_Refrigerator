@@ -90,9 +90,6 @@ class HomeFragment : Fragment() {
         binding.homeSearchApplyButton.setOnClickListener{
             val itemSelect = binding.homeSearchEditText.text
             val sortSelect = binding.homeSortAutoTextview.text
-
-
-
             val locationSelectList = ArrayList<String>()
 
             if (binding.homeChipAll.isChecked) locationSelectList.add("All")
@@ -106,16 +103,20 @@ class HomeFragment : Fragment() {
             if (binding.homeChipH.isChecked) locationSelectList.add("H")
 
 
-//            for ( i in 0 until binding.chipGroup.childCount ){
-//                val chip = binding.chipGroup.getChildAt(i) as Chip
-//                if (chip.isChecked){
-//                    locationSelectList.add(i)
-//                }
-//            }
-//
-//            val asd = ArrayList<String>()
-
             Log.d("select", "${itemSelect}, ${sortSelect}, ${locationSelectList}")
+
+            val dataArray = arrayOf( "2010/03/25", "2011/03/25", "2012/03/25", "2010/02/25", "2010/02/28", "2009/12/25", "2030/01/01", "1999/03/25" )
+            dataArray.sort()
+
+            Log.d("select", "${dataArray[0]}")
+            Log.d("select", "${dataArray[1]}")
+            Log.d("select", "${dataArray[2]}")
+            Log.d("select", "${dataArray[3]}")
+            Log.d("select", "${dataArray[4]}")
+            Log.d("select", "${dataArray[5]}")
+            Log.d("select", "${dataArray[6]}")
+            Log.d("select", "${dataArray[7]}")
+
             homeRecyclerview.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList)
 
         }

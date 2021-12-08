@@ -25,6 +25,9 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
     private val images = intArrayOf(1,2,3,4,5,6,7,8)
 
     private val locationArray = arrayOf( "A", "B", "C", "C", "B", "A", "B", "A" )
+    private val kindArray = arrayOf( "Apple", "asd", "ASD", "asD", "Bannna", "Apple", "apple", "cccc" )
+    private val dataArray = arrayOf( "2010-03-25", "2011-03-25", "2012-03-25", "2010-02-25", "2010-02-28", "2009-12-25", "2030-01-01", "1999-03-25" )
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): HomeAdapter.CustomViewHolder {
         val bind = DataBindingUtil.inflate<HomeCardviewBinding>(
@@ -42,14 +45,33 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
         //viewHolder.notificationsCardviewBinding.itemImage.setImageResource(images[i])
 
 
-        if (selectLocationArray[0] == "All") {
+        if (searchItem.isBlank()) {
+            viewHolder.homeCardviewBinding.homeKindTextview.text = kindArray[i]
             viewHolder.homeCardviewBinding.homeLocationTextview.text = locationArray[i]
         } else {
-            if (selectLocationArray.contains(locationArray[i])) {
+            if (searchItem.lowercase() == kindArray[i].lowercase()) {
+                viewHolder.homeCardviewBinding.homeKindTextview.text = kindArray[i]
                 viewHolder.homeCardviewBinding.homeLocationTextview.text = locationArray[i]
             } else {
                 viewHolder.homeCardviewBinding.homeCardViewMain.visibility = View.INVISIBLE
-                viewHolder.itemView.setLayoutParams(RecyclerView.LayoutParams(0, 0))
+                viewHolder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+            }
+        }
+
+        if (selectLocationArray.isEmpty()) {
+            viewHolder.homeCardviewBinding.homeCardViewMain.visibility = View.INVISIBLE
+            viewHolder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
+        }
+        else if (selectLocationArray[0] == "All" ) {
+            viewHolder.homeCardviewBinding.homeKindTextview.text = kindArray[i]
+            viewHolder.homeCardviewBinding.homeLocationTextview.text = locationArray[i]
+        } else {
+            if (selectLocationArray.contains(locationArray[i])) {
+                viewHolder.homeCardviewBinding.homeKindTextview.text = kindArray[i]
+                viewHolder.homeCardviewBinding.homeLocationTextview.text = locationArray[i]
+            } else {
+                viewHolder.homeCardviewBinding.homeCardViewMain.visibility = View.INVISIBLE
+                viewHolder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
             }
 
 
