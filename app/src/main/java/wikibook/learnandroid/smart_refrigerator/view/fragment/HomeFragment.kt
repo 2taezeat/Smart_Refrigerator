@@ -1,6 +1,7 @@
 package wikibook.learnandroid.smart_refrigerator.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,9 @@ import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentHomeBinding
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.viewmodels.HomeViewModel
+
+
+
 
 class HomeFragment : Fragment() {
 
@@ -44,6 +48,7 @@ class HomeFragment : Fragment() {
 //        })
 
         val homeContentLayout = binding.homeContentCl
+
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
         binding.homeToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -74,22 +79,49 @@ class HomeFragment : Fragment() {
             }
         }
 
-
-
-
         val homeRecyclerview = binding.homeRecyclerview
         homeRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
-        homeRecyclerview.adapter = HomeAdapter()
-
+        homeRecyclerview.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"))
 
         val sortMenus = listOf("Shelf Life", "Update Time")
         val sortAdapter = ArrayAdapter(lazyActivity, R.layout.sort_item, sortMenus)
         binding.homeSortAutoTextview.setAdapter(sortAdapter)
 
+        binding.homeSearchApplyButton.setOnClickListener{
+            val itemSelect = binding.homeSearchEditText.text
+            val sortSelect = binding.homeSortAutoTextview.text
+
+
+
+            val locationSelectList = ArrayList<String>()
+
+            if (binding.homeChipAll.isChecked) locationSelectList.add("All")
+            if (binding.homeChipA.isChecked) locationSelectList.add("A")
+            if (binding.homeChipB.isChecked) locationSelectList.add("B")
+            if (binding.homeChipC.isChecked) locationSelectList.add("C")
+            if (binding.homeChipD.isChecked) locationSelectList.add("D")
+            if (binding.homeChipE.isChecked) locationSelectList.add("E")
+            if (binding.homeChipF.isChecked) locationSelectList.add("F")
+            if (binding.homeChipG.isChecked) locationSelectList.add("G")
+            if (binding.homeChipH.isChecked) locationSelectList.add("H")
+
+
+//            for ( i in 0 until binding.chipGroup.childCount ){
+//                val chip = binding.chipGroup.getChildAt(i) as Chip
+//                if (chip.isChecked){
+//                    locationSelectList.add(i)
+//                }
+//            }
+//
+//            val asd = ArrayList<String>()
+
+            Log.d("select", "${itemSelect}, ${sortSelect}, ${locationSelectList}")
+            homeRecyclerview.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList)
+
+        }
+
         return root
     }
-
-
 
 //    }
 
@@ -98,4 +130,6 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

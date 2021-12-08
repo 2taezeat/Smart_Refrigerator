@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
         <variable
@@ -18,12 +19,15 @@
         app:cardCornerRadius="14dp"
         android:layout_margin="8dp"
         android:foreground="?selectableItemBackground"
-        android:clickable="true">
+        android:clickable="true"
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cardViewCL"
-            android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:id="@+id/home_cardViewCL"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:visibility="visible"
+            >
 
 
             <ImageView
