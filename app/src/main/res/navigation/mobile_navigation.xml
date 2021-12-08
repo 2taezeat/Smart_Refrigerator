@@ -22,4 +22,8 @@
         android:name="wikibook.learnandroid.smart_refrigerator.view.fragment.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+
+
+
 </navigation>

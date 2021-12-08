@@ -84,7 +84,6 @@ class DashboardFragment : Fragment() {
         }
 
 
-
         binding.dashboardEdittextShelflife.setOnClickListener{
             val cal = Calendar.getInstance()
             val dateSetListener = OnDateSetListener { view, year, month, dayOfMonth ->

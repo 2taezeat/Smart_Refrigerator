@@ -33,11 +33,11 @@
         <entry key="app/src/main/res/drawable/textview_border.xml" value="0.25526315789473686" />
         <entry key="app/src/main/res/drawable/toolbar_menu.xml" value="0.16644736842105262" />
         <entry key="app/src/main/res/font/font.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/asd.xml" value="0.33596491228070174" />
         <entry key="app/src/main/res/layout/dashboard_edit_cardview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/dashboard_edit_view.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_refrigerator_bottom_dialog.xml" value="0.335" />
