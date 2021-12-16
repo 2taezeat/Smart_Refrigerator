@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.NotificationsCardviewBinding
 import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfo
-import java.text.SimpleDateFormat
-import java.util.*
 
-class NotificationAdapter(val notificationInfo : ArrayList<NotificationInfo>) : RecyclerView.Adapter<NotificationAdapter.CustomViewHolder>() {
+class NotificationAdapter(val notificationInfo : List<NotificationInfo>) : RecyclerView.Adapter<NotificationAdapter.CustomViewHolder>() {
     inner class CustomViewHolder(val notificationsCardviewBinding: NotificationsCardviewBinding)
         : RecyclerView.ViewHolder(notificationsCardviewBinding.root)
 
@@ -33,9 +31,9 @@ class NotificationAdapter(val notificationInfo : ArrayList<NotificationInfo>) : 
         viewHolder.notificationsCardviewBinding.notificationCountTextview.text = notificationInfo[i].count.toString()
         viewHolder.notificationsCardviewBinding.notificationText.text = notificationInfo[i].notificationBody
 
-        val timeFormat = SimpleDateFormat("yy-MM-dd, hh:mm", Locale.getDefault())
-        val time = timeFormat.format(notificationInfo[i].notificationTime.time)
-        viewHolder.notificationsCardviewBinding.notificationTimeTextview.text = time
+        //val timeFormat = SimpleDateFormat("yy-MM-dd, hh:mm", Locale.getDefault())
+        //val time = timeFormat.format(notificationInfo[i].notificationTime.time)
+        viewHolder.notificationsCardviewBinding.notificationTimeTextview.text = notificationInfo[i].notificationTime
 
         when (notificationInfo[i].notificationCategory) {
             "N1" -> {

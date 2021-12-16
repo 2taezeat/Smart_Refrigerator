@@ -6,6 +6,7 @@ plugins {
 }
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'kotlin-kapt'
 
 android {
 
@@ -81,6 +82,42 @@ dependencies {
     implementation 'com.android.support:design:30.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
+
+
+    def room_version = "2.3.0" // check latest version from docs
+
+//    implementation "androidx.room:room-ktx:$room_version"
+//    kapt "androidx.room:room-compiler:$room_version"
+//    kapt 'android.arch.persistence.room:compiler:1.1.1'
+
+    implementation 'androidx.room:room-runtime:2.2.3'
+//    annotationProcessor 'androidx.room:room-compiler:2.2.3' // remove this and use the following
+    kapt "androidx.room:room-compiler:2.2.3"
+
+
+//    // To use Kotlin annotation processing tool (kapt)
+//    kapt("androidx.room:room-compiler:$roomVersion")
+//    // To use Kotlin Symbolic Processing (KSP)
+//    ksp("androidx.room:room-compiler:$roomVersion")
+//
+//    // optional - Kotlin Extensions and Coroutines support for Room
+//    implementation("androidx.room:room-ktx:$roomVersion")
+//
+//    // optional - RxJava2 support for Room
+//    implementation("androidx.room:room-rxjava2:$roomVersion")
+//
+//    // optional - RxJava3 support for Room
+//    implementation("androidx.room:room-rxjava3:$roomVersion")
+//
+//    // optional - Guava support for Room, including Optional and ListenableFuture
+//    implementation("androidx.room:room-guava:$roomVersion")
+//
+//    // optional - Test helpers
+//    testImplementation("androidx.room:room-testing:$roomVersion")
+//
+//    // optional - Paging 3 Integration
+//    implementation("androidx.room:room-paging:2.4.0-rc01")
+
 
 
 

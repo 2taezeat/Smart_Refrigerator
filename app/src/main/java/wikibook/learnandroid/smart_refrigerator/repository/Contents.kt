@@ -6,7 +6,7 @@ data class Contents(
         val kind : String,
         val location : String,
         val updateTime : Timestamp, // time
-        var count : Int,
+        val count : Int,
         val shelfTime : String, // data
         val purchaseDate : String, // data
         val image : String,

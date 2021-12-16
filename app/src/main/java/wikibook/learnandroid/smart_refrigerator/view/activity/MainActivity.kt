@@ -24,6 +24,7 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.ActivityMainBinding
+import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfoDatabase
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     val REQUEST_IMAGE_CAPTURE = 1 // 카메라 사진 촬영 요청코드
     lateinit var curPhotoPath : String // 문자열 형태의 사진 경로 값 ( 초기 값은 null )
+    private lateinit var db: NotificationInfoDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +50,8 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
 
 
-        //App.prefs.getValue("notificationInfoArray")
 
+        db = NotificationInfoDatabase.getInstance(applicationContext)!!
 
         navView.setupWithNavController(navController)
 
@@ -62,10 +64,11 @@ class MainActivity : AppCompatActivity() {
             }
             val token = task.result
             val msg = getString(R.string.msg_token_fmt, token)
-            Log.d("hello", msg)
+            Log.d("token", msg)
         })
 
     }
+
 
 
 
@@ -155,6 +158,8 @@ class MainActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
         Toast.makeText(this, "The picture has been successfully saved in the album.", Toast.LENGTH_SHORT).show()
    }
+
+
 
 
 }

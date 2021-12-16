@@ -12,7 +12,14 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfo
+import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfoDatabase
 import wikibook.learnandroid.smart_refrigerator.view.activity.MainActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class FirebaseMessagingService : FirebaseMessagingService() {
@@ -23,6 +30,9 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         sendRegistrationToServer(token) // FCM 등록 토큰을 앱서버에 추가합니다.
     }
 
+
+    var db = NotificationInfoDatabase.getInstance(this)!!
+
     // 메세지를 수신할때 호출한다. remoteMessage는 수신한 메시지이다.
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
@@ -31,6 +41,21 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
+
+            val data = remoteMessage.data
+            val notificationCategory = data.getValue("body")
+            val kind = data.getValue("kind")
+            val notificationBody = data.getValue("title")
+            val count = data.getValue("count").toInt()
+            val location = data.getValue("location")
+
+            val nowTime: Long = System.currentTimeMillis()
+            val date = Date(nowTime)             // 현재 시간을 Date 타입으로 변환
+            val dateFormat = SimpleDateFormat("yy-MM-dd, hh:mm", Locale("ko", "KR")) // 날짜, 시간을 가져오고 싶은 형태 선언
+            val notificationTime = dateFormat.format(date) // 현재 시간을 dateFormat 에 선언한 형태의 String 으로 변환
+            CoroutineScope(Dispatchers.IO).launch {
+                db.notificationInfoDao().insert(NotificationInfo(notificationCategory, kind, location, notificationBody, notificationTime, count))
+            }
 
             sendNotification(remoteMessage)
             if (true) { /* Check if data needs to be processed by long running job */
@@ -96,5 +121,32 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         // 알림 생성
         notificationManager.notify(uniId, notificationBuilder.build())
     }
+
+
+//    private fun addUser(){
+//        //var name = binding.etName.text.toString()
+//        //var age = binding.etAge.text.toString()
+//        //var phone = binding.etPhone.text.toString()
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            db.notificationDao().insert(User(name, age, phone))
+//        }
+//    }
+//
+//    private fun refreshNotificationInfo(){
+//        var userList = "유저 리스트\n"
+//
+//        CoroutineScope(Dispatchers.Main).launch {
+//            val users = CoroutineScope(Dispatchers.IO).async {
+//                db.notificationDao().getAll()
+//            }.await()
+//
+//            for(user in users){
+//                userList += "이름: ${user.name}, 나이: ${user.age}, 번호: ${user.phone}\n"
+//            }
+//            //binding.tvPerson.text = userList
+//        }
+//    }
+
 
 }

@@ -10,12 +10,15 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.NotificationAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentNotificationsBinding
-import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfo
+import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfoDatabase
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.viewmodels.NotificationsViewModel
-import java.sql.Timestamp
 
 class NotificationsFragment : Fragment() {
 
@@ -52,51 +55,53 @@ class NotificationsFragment : Fragment() {
             }
         }
 
-
-
-
-
-        val notificationInfoTmp : ArrayList<NotificationInfo> = arrayListOf(
-            NotificationInfo(
-                notificationCategory = "N1",
-                kind = "Apple",
-                location = "B",
-                notificationBody = "There is one \"apple\"(10) left in \"B\".",
-                notificationTime = Timestamp.valueOf("2021-11-22 09:12:34"),
-                count = 10
-            ),
-            NotificationInfo(
-                notificationCategory = "N2",
-                kind = "meat",
-                location = "A",
-                notificationBody = "It has been 10 days, since the \"meat\"(1) in \"A\" was stored.",
-                notificationTime = Timestamp.valueOf("2021-10-22 09:12:34"),
-                count = 1
-            ),
-            NotificationInfo(
-                notificationCategory = "N3",
-                kind = "milk",
-                location = "D",
-                notificationBody = "The shelf life of the \"milk\"(2) in \"D\" is imminent.",
-                notificationTime = Timestamp.valueOf("2021-09-22 09:12:34"),
-                count = 2
-            ),
-            NotificationInfo(
-                notificationCategory = "N4",
-                kind = "bread",
-                location = "E",
-                notificationBody = "The state of \"bread\"(3) in \"E\" has been updated.",
-                notificationTime = Timestamp.valueOf("2021-08-22 09:12:34"),
-                count = 3
-            )
-
-        )
-
-
+//        val notificationInfoTmp : ArrayList<NotificationInfo> = arrayListOf(
+//            NotificationInfo(
+//                notificationCategory = "N1",
+//                kind = "Apple",
+//                location = "B",
+//                notificationBody = "There is one \"apple\"(10) left in \"B\".",
+//                notificationTime = Timestamp.valueOf("2021-11-22 09:12:34"),
+//                count = 10
+//            ),
+//            NotificationInfo(
+//                notificationCategory = "N2",
+//                kind = "meat",
+//                location = "A",
+//                notificationBody = "It has been 10 days, since the \"meat\"(1) in \"A\" was stored.",
+//                notificationTime = Timestamp.valueOf("2021-10-22 09:12:34"),
+//                count = 1
+//            ),
+//            NotificationInfo(
+//                notificationCategory = "N3",
+//                kind = "milk",
+//                location = "D",
+//                notificationBody = "The shelf life of the \"milk\"(2) in \"D\" is imminent.",
+//                notificationTime = Timestamp.valueOf("2021-09-22 09:12:34"),
+//                count = 2
+//            ),
+//            NotificationInfo(
+//                notificationCategory = "N4",
+//                kind = "bread",
+//                location = "E",
+//                notificationBody = "The state of \"bread\"(3) in \"E\" has been updated.",
+//                notificationTime = Timestamp.valueOf("2021-08-22 09:12:34"),
+//                count = 3
+//            )
+//
+//        )
 
         val notificationRecyclerview = binding.notificationRecyclerview
-        notificationRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
-        notificationRecyclerview.adapter = NotificationAdapter(notificationInfoTmp)
+
+        var db = NotificationInfoDatabase.getInstance(lazyActivity)!!
+        CoroutineScope(Dispatchers.Main).launch {
+            val notificationInfoList = CoroutineScope(Dispatchers.IO).async {
+                db.notificationInfoDao().getAll()
+            }.await()
+
+            notificationRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
+            notificationRecyclerview.adapter = NotificationAdapter(notificationInfoList.reversed())
+        }
 
         return root
     }
@@ -105,4 +110,18 @@ class NotificationsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+//    private fun refreshUserList(){
+//        var userList = "유저 리스트\n"
+//
+//        CoroutineScope(Dispatchers.Main).launch {
+//            val users = CoroutineScope(Dispatchers.IO).async {
+//                db.userDao().getAll()
+//            }.await()
+//
+//            for(user in users){
+//                userList += "이름: ${user.name}, 나이: ${user.age}, 번호: ${user.phone}\n"
+//            }
+//        }
+
 }
