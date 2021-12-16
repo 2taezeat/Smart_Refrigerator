@@ -39,7 +39,7 @@ class DashboardFragment : Fragment() {
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
             var imageUrl = it.data?.data
-            //binding.dashboardFragmentIV1.setImageURI(imageUrl)
+            binding.dashboardFragmentIV1.setImageURI(imageUrl)
         }
     }
 

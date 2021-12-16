@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             .check()
     }
 
-    // startActivityForResult를 통해서 기본 카메라 앱으로 부터 받아온 사진 결과 받아오
+    // startActivityForResult를 통해서 기본 카메라 앱으로 부터 받아온 사진 결과 받아오기
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 
         val out = FileOutputStream(folderPath + fileName)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-        Toast.makeText(this, "사진이 앨범에 저장되었습니다.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "The picture has been successfully saved in the album.", Toast.LENGTH_SHORT).show()
    }
 
 

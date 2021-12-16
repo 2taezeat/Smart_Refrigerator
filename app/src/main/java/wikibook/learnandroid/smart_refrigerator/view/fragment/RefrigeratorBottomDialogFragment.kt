@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import wikibook.learnandroid.smart_refrigerator.R
 
@@ -33,15 +34,28 @@ class RefrigeratorBottomDialogFragment : BottomSheetDialogFragment(){
         val refrigeratorG = view.findViewById<ConstraintLayout>(R.id.bottom_cl_g)
         val refrigeratorH = view.findViewById<ConstraintLayout>(R.id.bottom_cl_h)
 
+        val view2: View = inflater.inflate(R.layout.fragment_home, container, true)
+        val hv = view2.findViewById<RecyclerView>(R.id.home_recyclerview)
+
+
+
 
         //val homeRecyclerview = view.findViewById<RecyclerView>(R.id.home_recyclerview)
         //homeRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
+
 
         refrigeratorA.setOnClickListener {
             //homeRecyclerview.adapter = HomeAdapter("","", arrayListOf<String>("A"))
             dismiss()
             val navController = findNavController()
             navController.navigate(R.id.navigation_home)
+
+            val hf = HomeFragment()
+            val bundle = Bundle()
+            bundle.putStringArrayList("location",arrayListOf<String>("A"))
+            hf.setArguments(bundle)
+            //hv.layoutManager = LinearLayoutManager(lazyActivity)
+            //hv.adapter = HomeAdapter("Apple","", arrayListOf<String>("A"))
 
         }
 

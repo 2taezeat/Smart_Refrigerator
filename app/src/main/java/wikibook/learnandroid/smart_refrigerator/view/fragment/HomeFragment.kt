@@ -19,7 +19,7 @@ import wikibook.learnandroid.smart_refrigerator.viewmodels.HomeViewModel
 
 
 
-class HomeFragment : Fragment() {
+class HomeFragment() : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
@@ -48,6 +48,11 @@ class HomeFragment : Fragment() {
 //        })
 
         val homeContentLayout = binding.homeContentCl
+
+        //val bundle: Bundle = intent.getBundleExtra("myBundle")
+        val bundle = arguments
+        //val qwe = bundle!!.getStringArrayList("location")
+        Log.d("asd","${bundle}")
 
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
         binding.homeToolbar.setOnMenuItemClickListener {
@@ -79,9 +84,10 @@ class HomeFragment : Fragment() {
             }
         }
 
-        val homeRecyclerview = binding.homeRecyclerview
-        homeRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
-        homeRecyclerview.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"))
+        val homeRecyclerView = binding.homeRecyclerview
+        homeRecyclerView.layoutManager = LinearLayoutManager(lazyActivity)
+        homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"))
+
 
         val sortMenus = listOf("Shelf Life", "Update Time")
         val sortAdapter = ArrayAdapter(lazyActivity, R.layout.sort_item, sortMenus)
@@ -105,27 +111,16 @@ class HomeFragment : Fragment() {
 
             Log.d("select", "${itemSelect}, ${sortSelect}, ${locationSelectList}")
 
-            val dataArray = arrayOf( "2010/03/25", "2011/03/25", "2012/03/25", "2010/02/25", "2010/02/28", "2009/12/25", "2030/01/01", "1999/03/25" )
-            dataArray.sort()
+            //val dataArray = arrayOf( "2010/03/25", "2011/03/25", "2012/03/25", "2010/02/25", "2010/02/28", "2009/12/25", "2030/01/01", "1999/03/25" )
+            //dataArray.sort()
 
-            Log.d("select", "${dataArray[0]}")
-            Log.d("select", "${dataArray[1]}")
-            Log.d("select", "${dataArray[2]}")
-            Log.d("select", "${dataArray[3]}")
-            Log.d("select", "${dataArray[4]}")
-            Log.d("select", "${dataArray[5]}")
-            Log.d("select", "${dataArray[6]}")
-            Log.d("select", "${dataArray[7]}")
 
-            homeRecyclerview.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList)
+            homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList)
 
         }
 
         return root
     }
-
-//    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
