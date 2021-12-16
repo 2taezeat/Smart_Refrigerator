@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.NotificationAdapter
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentNotificationsBinding
+import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfo
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.viewmodels.NotificationsViewModel
+import java.sql.Timestamp
 
 class NotificationsFragment : Fragment() {
 
@@ -33,20 +35,9 @@ class NotificationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         notificationsViewModel = ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        //_binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications,container,false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textNotifications
-//        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
-
-//        binding.notificationToolbar.setNavigationIcon(R.drawable.ic_baseline_kitchen_24)
-//
-//        binding.notificationToolbar.setNavigationOnClickListener { view ->
-//            // Navigate somewhere
-//        }
 
         binding.notificationToolbar.inflateMenu(R.menu.notification_toolbar_menu)
 
@@ -61,10 +52,51 @@ class NotificationsFragment : Fragment() {
             }
         }
 
+
+
+
+
+        val notificationInfoTmp : ArrayList<NotificationInfo> = arrayListOf(
+            NotificationInfo(
+                notificationCategory = "N1",
+                kind = "Apple",
+                location = "B",
+                notificationBody = "There is one \"apple\"(10) left in \"B\".",
+                notificationTime = Timestamp.valueOf("2021-11-22 09:12:34"),
+                count = 10
+            ),
+            NotificationInfo(
+                notificationCategory = "N2",
+                kind = "meat",
+                location = "A",
+                notificationBody = "It has been 10 days, since the \"meat\"(1) in \"A\" was stored.",
+                notificationTime = Timestamp.valueOf("2021-10-22 09:12:34"),
+                count = 1
+            ),
+            NotificationInfo(
+                notificationCategory = "N3",
+                kind = "milk",
+                location = "D",
+                notificationBody = "The shelf life of the \"milk\"(2) in \"D\" is imminent.",
+                notificationTime = Timestamp.valueOf("2021-09-22 09:12:34"),
+                count = 2
+            ),
+            NotificationInfo(
+                notificationCategory = "N4",
+                kind = "bread",
+                location = "E",
+                notificationBody = "The state of \"bread\"(3) in \"E\" has been updated.",
+                notificationTime = Timestamp.valueOf("2021-08-22 09:12:34"),
+                count = 3
+            )
+
+        )
+
+
+
         val notificationRecyclerview = binding.notificationRecyclerview
         notificationRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
-        notificationRecyclerview.adapter = NotificationAdapter()
-
+        notificationRecyclerview.adapter = NotificationAdapter(notificationInfoTmp)
 
         return root
     }

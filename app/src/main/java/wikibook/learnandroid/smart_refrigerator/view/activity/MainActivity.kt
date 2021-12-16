@@ -47,15 +47,10 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each`
         // menu should be considered as top level destinations.
 
-//        val toolBar = binding.mainToolbar
-//        setSupportActionBar(toolBar)
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-//            )
-//        )
 
-        //setupActionBarWithNavController(navController, appBarConfiguration)
+        //App.prefs.getValue("notificationInfoArray")
+
+
         navView.setupWithNavController(navController)
 
         setPermission() // 권한을 체크하는 메소드
@@ -71,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
 
 
     // 카메라 촬영

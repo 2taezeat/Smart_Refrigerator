@@ -1,27 +1,21 @@
 package com.ebookfrenzy.carddemo
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.NotificationsCardviewBinding
+import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfo
+import java.text.SimpleDateFormat
+import java.util.*
 
-class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.CustomViewHolder>() {
+class NotificationAdapter(val notificationInfo : ArrayList<NotificationInfo>) : RecyclerView.Adapter<NotificationAdapter.CustomViewHolder>() {
     inner class CustomViewHolder(val notificationsCardviewBinding: NotificationsCardviewBinding)
         : RecyclerView.ViewHolder(notificationsCardviewBinding.root)
 
-    private val titles = arrayOf("Chapter One",
-        "Chapter Two", "Chapter Three", "Chapter Four",
-        "Chapter Five", "Chapter Six", "Chapter Seven",
-        "Chapter Eight")
 
-    private val details = arrayOf("Item one details", "Item two details",
-        "Item three details", "Item four details",
-        "Item five details", "Item six details",
-        "Item seven details", "Item eight details")
-
-    private val images = intArrayOf(1,2,3,4,5,6,7,8)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): NotificationAdapter.CustomViewHolder {
         val bind = DataBindingUtil.inflate<NotificationsCardviewBinding>(
@@ -34,12 +28,38 @@ class NotificationAdapter() : RecyclerView.Adapter<NotificationAdapter.CustomVie
     }
 
     override fun onBindViewHolder(viewHolder: CustomViewHolder, i: Int) {
-        viewHolder.notificationsCardviewBinding.notificationText.text = titles[i]
-        viewHolder.notificationsCardviewBinding.notificationText.text = details[i]
-        //viewHolder.notificationsCardviewBinding.itemImage.setImageResource(images[i])
+        viewHolder.notificationsCardviewBinding.notificationKindTextview.text = notificationInfo[i].kind
+        viewHolder.notificationsCardviewBinding.notificationLocationTextview.text = notificationInfo[i].location
+        viewHolder.notificationsCardviewBinding.notificationCountTextview.text = notificationInfo[i].count.toString()
+        viewHolder.notificationsCardviewBinding.notificationText.text = notificationInfo[i].notificationBody
+
+        val timeFormat = SimpleDateFormat("yy-MM-dd, hh:mm", Locale.getDefault())
+        val time = timeFormat.format(notificationInfo[i].notificationTime.time)
+        viewHolder.notificationsCardviewBinding.notificationTimeTextview.text = time
+
+        when (notificationInfo[i].notificationCategory) {
+            "N1" -> {
+                viewHolder.notificationsCardviewBinding.notificationImageview.setBackgroundColor(
+                    Color.parseColor("#FFE65151"))
+            }
+            "N2" -> {
+                viewHolder.notificationsCardviewBinding.notificationImageview.setBackgroundColor(
+                    Color.parseColor("#FFF1BA5D"))
+            }
+            "N3" -> {
+                viewHolder.notificationsCardviewBinding.notificationImageview.setBackgroundColor(
+                    Color.parseColor("#FFAEEC58"))
+            }
+            "N4" -> {
+                viewHolder.notificationsCardviewBinding.notificationImageview.setBackgroundColor(
+                    Color.parseColor("#FF58C2EC"))
+            }
+        }
+
+
     }
 
     override fun getItemCount(): Int {
-        return titles.size
+        return notificationInfo.size
     }
 }
