@@ -37,46 +37,75 @@ class RefrigeratorBottomDialogFragment : BottomSheetDialogFragment(){
         val view2: View = inflater.inflate(R.layout.fragment_home, container, true)
         val hv = view2.findViewById<RecyclerView>(R.id.home_recyclerview)
 
-
-
-
-        //val homeRecyclerview = view.findViewById<RecyclerView>(R.id.home_recyclerview)
-        //homeRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
-
-
         refrigeratorA.setOnClickListener {
-            //homeRecyclerview.adapter = HomeAdapter("","", arrayListOf<String>("A"))
-            dismiss()
-            val navController = findNavController()
-            navController.navigate(R.id.navigation_home)
-
-            val hf = HomeFragment()
             val bundle = Bundle()
             bundle.putStringArrayList("location",arrayListOf<String>("A"))
-            hf.setArguments(bundle)
-            //hv.layoutManager = LinearLayoutManager(lazyActivity)
-            //hv.adapter = HomeAdapter("Apple","", arrayListOf<String>("A"))
+            dismiss()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_home,bundle)
 
         }
 
+        refrigeratorB.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putStringArrayList("location",arrayListOf<String>("B"))
+            dismiss()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_home,bundle)
+        }
 
+        refrigeratorC.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putStringArrayList("location",arrayListOf<String>("C"))
+            dismiss()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_home,bundle)
+        }
+
+        refrigeratorD.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putStringArrayList("location",arrayListOf<String>("D"))
+            dismiss()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_home,bundle)
+        }
+
+        refrigeratorE.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putStringArrayList("location",arrayListOf<String>("E"))
+            dismiss()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_home,bundle)
+        }
+
+        refrigeratorF.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putStringArrayList("location",arrayListOf<String>("F"))
+            dismiss()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_home,bundle)
+        }
+
+        refrigeratorG.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putStringArrayList("location",arrayListOf<String>("G"))
+            dismiss()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_home,bundle)
+        }
+
+        refrigeratorH.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putStringArrayList("location",arrayListOf<String>("H"))
+            dismiss()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_home,bundle)
+        }
 
 
         return view
     }
     override fun getTheme(): Int = R.style.CustomBottomSheetDialog
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        val refrigeratorA = view.findViewById<ConstraintLayout>(R.id.bottom_cl_a)
-//
-//        refrigeratorA.setOnClickListener {
-//            // navigation call here
-////            val action = RefrigeratorBottomDialogFragmentDirections.actionNavigationRefrigeratorToNavigationHome()
-////            findNavController().navigate(action)
-//        }
-//    }
 
 
 }

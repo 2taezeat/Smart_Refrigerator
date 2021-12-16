@@ -49,10 +49,19 @@ class HomeFragment() : Fragment() {
 
         val homeContentLayout = binding.homeContentCl
 
-        //val bundle: Bundle = intent.getBundleExtra("myBundle")
         val bundle = arguments
-        //val qwe = bundle!!.getStringArrayList("location")
-        Log.d("asd","${bundle}")
+        val locationArrayBundle = bundle?.getStringArrayList("location")
+
+        val homeRecyclerView = binding.homeRecyclerview
+        homeRecyclerView.layoutManager = LinearLayoutManager(lazyActivity)
+
+        if (locationArrayBundle == null) {
+            homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"))
+        } else {
+            homeRecyclerView.adapter = HomeAdapter("","", locationArrayBundle)
+        }
+
+
 
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
         binding.homeToolbar.setOnMenuItemClickListener {
@@ -84,9 +93,6 @@ class HomeFragment() : Fragment() {
             }
         }
 
-        val homeRecyclerView = binding.homeRecyclerview
-        homeRecyclerView.layoutManager = LinearLayoutManager(lazyActivity)
-        homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"))
 
 
         val sortMenus = listOf("Shelf Life", "Update Time")
