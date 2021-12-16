@@ -82,32 +82,32 @@ class NotificationsFragment : Fragment() {
 //                kind = "Apple",
 //                location = "B",
 //                notificationBody = "There is one \"apple\"(10) left in \"B\".",
-//                notificationTime = Timestamp.valueOf("2021-11-22 09:12:34"),
-//                count = 10
+//                notificationTime = "2021-11-22 09:12:34",
+//                count = 1
 //            ),
 //            NotificationInfo(
 //                notificationCategory = "N2",
 //                kind = "meat",
 //                location = "A",
 //                notificationBody = "It has been 10 days, since the \"meat\"(1) in \"A\" was stored.",
-//                notificationTime = Timestamp.valueOf("2021-10-22 09:12:34"),
-//                count = 1
+//                notificationTime = "2021-10-22 09:12:34",
+//                count = 2
 //            ),
 //            NotificationInfo(
 //                notificationCategory = "N3",
 //                kind = "milk",
 //                location = "D",
 //                notificationBody = "The shelf life of the \"milk\"(2) in \"D\" is imminent.",
-//                notificationTime = Timestamp.valueOf("2021-09-22 09:12:34"),
-//                count = 2
+//                notificationTime = "2021-09-22 09:12:34",
+//                count = 3
 //            ),
 //            NotificationInfo(
 //                notificationCategory = "N4",
 //                kind = "bread",
 //                location = "E",
 //                notificationBody = "The state of \"bread\"(3) in \"E\" has been updated.",
-//                notificationTime = Timestamp.valueOf("2021-08-22 09:12:34"),
-//                count = 3
+//                notificationTime = "2021-08-22 09:12:34",
+//                count = 4
 //            )
 //
 //        )

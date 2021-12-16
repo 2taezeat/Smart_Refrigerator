@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -16,11 +17,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.DashboardEditingAdapter
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBinding
+import wikibook.learnandroid.smart_refrigerator.repository.Contents
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.view.activity.MainActivity
 import wikibook.learnandroid.smart_refrigerator.viewmodels.DashboardViewModel
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -35,6 +42,9 @@ class DashboardFragment : Fragment() {
     private val lazyActivity by lazy {
         requireActivity()
     }
+    var fbAuth : FirebaseAuth? = null
+    var fbFirestore : FirebaseFirestore? = null
+    var fbStorage : FirebaseStorage? = null
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
@@ -42,6 +52,7 @@ class DashboardFragment : Fragment() {
             binding.dashboardFragmentIV1.setImageURI(imageUrl)
         }
     }
+
 
 
     override fun onCreateView(
@@ -55,10 +66,9 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //val textView: TextView = binding.textDashboard
-//        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
+        fbStorage = FirebaseStorage.getInstance()
+        fbAuth = FirebaseAuth.getInstance()
+        fbFirestore = FirebaseFirestore.getInstance()
 
         binding.dashboardToolbar.inflateMenu(R.menu.dashboard_toolbar_menu)
         binding.dashboardToolbar.setOnMenuItemClickListener {
@@ -78,6 +88,49 @@ class DashboardFragment : Fragment() {
                     (lazyActivity as MainActivity).takeCapture()
                     true
                 }
+                R.id.dashboard_menu_upload -> {
+                    val nowTime: Long = System.currentTimeMillis() // content ID
+                    val date = Date(nowTime)             // 현재 시간을 Date 타입으로 변환
+                    val dateFormat = SimpleDateFormat("yy-MM-dd, hh:mm", Locale("ko", "KR")) // 날짜, 시간을 가져오고 싶은 형태 선언
+
+                    val kind = binding.dashboardEdittextKind.text.toString()
+                    val location = binding.dashboardEdittextLocation.text.toString()
+                    val updateTime = dateFormat.format(date) // 현재 시간을 dateFormat 에 선언한 형태의 String 으로 변환
+                    val count = binding.dashboardEdittextCount.text.toString().toInt()
+                    val shelfTime = binding.dashboardEdittextShelflife.text.toString()
+                    val purchaseDate = binding.dashboardEdittextPurchasingtime.text.toString()
+                    val image = "tmpimage"
+                    val memo = binding.dashboardEdittextMemo.text.toString()
+                    val useAi = binding.dashboardUseAiCheckbox.isChecked
+
+                    val contentAdd = Contents(
+                        kind = kind,
+                        location = location,
+                        updateTime = updateTime,
+                        count = count,
+                        shelfTime = shelfTime,
+                        purchaseDate = purchaseDate,
+                        image = image,
+                        memo = memo,
+                        useAi = useAi
+                    )
+                    fbFirestore?.collection("contents")?.document(nowTime.toString())?.set(contentAdd)
+
+                    clearValue(binding.dashboardEdittextKind)
+                    clearValue(binding.dashboardEdittextLocation)
+                    clearValue(binding.dashboardEdittextCount)
+                    clearValue(binding.dashboardEdittextShelflife)
+                    clearValue(binding.dashboardEdittextPurchasingtime)
+                    clearValue(binding.dashboardEdittextMemo)
+                    binding.dashboardUseAiCheckbox.isChecked = false
+                    binding.dashboardFragmentIV1.setImageDrawable(null)
+
+
+
+                    Toast.makeText(lazyActivity,"Upload Success!",Toast.LENGTH_SHORT).show()
+                    true
+                }
+
 
                 else -> false
             }
@@ -127,12 +180,9 @@ class DashboardFragment : Fragment() {
         })
 
 
-
         val dashBoardEditingRecyclerview = binding.dashboardEditingRecyclerview
         dashBoardEditingRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
         dashBoardEditingRecyclerview.adapter = DashboardEditingAdapter()
-
-
 
         return root
     }
@@ -155,4 +205,9 @@ class DashboardFragment : Fragment() {
             }
         }
     }
+
+    fun clearValue(textInputEditText: TextInputEditText) {
+        textInputEditText.setText("")
+    }
+
 }

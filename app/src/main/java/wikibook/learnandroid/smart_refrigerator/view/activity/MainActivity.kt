@@ -19,6 +19,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
@@ -37,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     val REQUEST_IMAGE_CAPTURE = 1 // 카메라 사진 촬영 요청코드
     lateinit var curPhotoPath : String // 문자열 형태의 사진 경로 값 ( 초기 값은 null )
     private lateinit var db: NotificationInfoDatabase
+    private var auth : FirebaseAuth? = null
+    private var firestore : FirebaseFirestore? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +67,20 @@ class MainActivity : AppCompatActivity() {
             Log.d("token", msg)
         })
 
+
+
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+
+
     }
+
+
+
+
+//
+//    firestore?.collection(auth!!.currentUser!!.uid)?.document()?.set(resultDTO)
+//    Toast.makeText(this,"저장완료",Toast.LENGTH_SHORT).show()
 
 
 

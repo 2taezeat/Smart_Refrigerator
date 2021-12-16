@@ -1,11 +1,9 @@
 package wikibook.learnandroid.smart_refrigerator.repository
 
-import java.sql.Timestamp
-
 data class Contents(
         val kind : String,
         val location : String,
-        val updateTime : Timestamp, // time
+        val updateTime : String, // time
         val count : Int,
         val shelfTime : String, // data
         val purchaseDate : String, // data
