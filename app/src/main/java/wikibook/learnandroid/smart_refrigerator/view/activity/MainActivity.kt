@@ -49,12 +49,8 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each`
         // menu should be considered as top level destinations.
 
-
-
         db = NotificationInfoDatabase.getInstance(applicationContext)!!
-
         navView.setupWithNavController(navController)
-
         setPermission() // 권한을 체크하는 메소드
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->

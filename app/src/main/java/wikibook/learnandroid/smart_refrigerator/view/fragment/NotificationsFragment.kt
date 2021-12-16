@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ebookfrenzy.carddemo.NotificationAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,7 +41,8 @@ class NotificationsFragment : Fragment() {
         notificationsViewModel = ViewModelProvider(this).get(NotificationsViewModel::class.java)
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications,container,false)
         val root: View = binding.root
-
+        val notificationRecyclerview = binding.notificationRecyclerview
+        var db = NotificationInfoDatabase.getInstance(lazyActivity)!!
 
         binding.notificationToolbar.inflateMenu(R.menu.notification_toolbar_menu)
 
@@ -51,9 +53,28 @@ class NotificationsFragment : Fragment() {
                     BottomDialogShow.refrigeratorBottomDialogFragmentShow(fragmentManager)
                     true
                 }
+                R.id.notification_menu_refresh -> {
+                    updateNotificationInfo(db, notificationRecyclerview)
+                    true
+                }
+
                 else -> false
             }
         }
+
+
+        updateNotificationInfo(db, notificationRecyclerview)
+
+
+//        CoroutineScope(Dispatchers.Main).launch {
+//            val notificationInfoList = CoroutineScope(Dispatchers.IO).async {
+//                db.notificationInfoDao().getAll()
+//            }.await()
+//
+//            notificationRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
+//            notificationRecyclerview.adapter = NotificationAdapter(notificationInfoList.reversed())
+//        }
+
 
 //        val notificationInfoTmp : ArrayList<NotificationInfo> = arrayListOf(
 //            NotificationInfo(
@@ -91,17 +112,7 @@ class NotificationsFragment : Fragment() {
 //
 //        )
 
-        val notificationRecyclerview = binding.notificationRecyclerview
 
-        var db = NotificationInfoDatabase.getInstance(lazyActivity)!!
-        CoroutineScope(Dispatchers.Main).launch {
-            val notificationInfoList = CoroutineScope(Dispatchers.IO).async {
-                db.notificationInfoDao().getAll()
-            }.await()
-
-            notificationRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
-            notificationRecyclerview.adapter = NotificationAdapter(notificationInfoList.reversed())
-        }
 
         return root
     }
@@ -111,17 +122,16 @@ class NotificationsFragment : Fragment() {
         _binding = null
     }
 
-//    private fun refreshUserList(){
-//        var userList = "유저 리스트\n"
-//
-//        CoroutineScope(Dispatchers.Main).launch {
-//            val users = CoroutineScope(Dispatchers.IO).async {
-//                db.userDao().getAll()
-//            }.await()
-//
-//            for(user in users){
-//                userList += "이름: ${user.name}, 나이: ${user.age}, 번호: ${user.phone}\n"
-//            }
-//        }
+    private fun updateNotificationInfo(db : NotificationInfoDatabase, recyclerView: RecyclerView) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val notificationInfoList = CoroutineScope(Dispatchers.IO).async {
+                db.notificationInfoDao().getAll()
+            }.await()
+
+            recyclerView.layoutManager = LinearLayoutManager(lazyActivity)
+            recyclerView.adapter = NotificationAdapter(notificationInfoList.reversed())
+        }
+    }
+
 
 }

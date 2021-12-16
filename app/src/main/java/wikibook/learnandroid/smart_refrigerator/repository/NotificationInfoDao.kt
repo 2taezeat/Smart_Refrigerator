@@ -12,6 +12,6 @@ interface NotificationInfoDao {
         @Insert
         fun insert(user: NotificationInfo)
 
-//        @Query("DELETE FROM User WHERE name = :name")
-//        fun deleteUserByName(name: String)
+        @Query("DELETE FROM NotificationInfo WHERE kind = :kind")
+        fun deleteUserByKind(kind: String)
 }
