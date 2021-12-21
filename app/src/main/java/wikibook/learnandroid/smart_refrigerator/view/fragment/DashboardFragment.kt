@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,9 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.DashboardEditingAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBinding
 import wikibook.learnandroid.smart_refrigerator.repository.Contents
@@ -30,6 +32,12 @@ import wikibook.learnandroid.smart_refrigerator.view.activity.MainActivity
 import wikibook.learnandroid.smart_refrigerator.viewmodels.DashboardViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+
+
+
+
+
+
 
 
 class DashboardFragment : Fragment() {
@@ -43,15 +51,24 @@ class DashboardFragment : Fragment() {
     private val lazyActivity by lazy {
         requireActivity()
     }
-    var fbAuth : FirebaseAuth? = null
     var fbFirestore : FirebaseFirestore? = null
-    var fbStorage : FirebaseStorage? = null
+
+
+    var imageUri : Uri? = null
+
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == Activity.RESULT_OK) {
             var imageUrl = it.data?.data
             binding.dashboardFragmentIV1.setImageURI(imageUrl)
+            val path = imageUrl?.path
+            val fbStorageTmp = FirebaseStorage.getInstance()
+            val storageReference = fbStorageTmp.reference
+            imageUri = imageUrl
+
         }
+
+
     }
 
 
@@ -67,9 +84,9 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        fbStorage = FirebaseStorage.getInstance()
-        fbAuth = FirebaseAuth.getInstance()
         fbFirestore = FirebaseFirestore.getInstance()
+
+
 
         binding.dashboardToolbar.inflateMenu(R.menu.dashboard_toolbar_menu)
         binding.dashboardToolbar.setOnMenuItemClickListener {
@@ -128,9 +145,10 @@ class DashboardFragment : Fragment() {
                     binding.dashboardUseAiCheckbox.isChecked = false
                     binding.dashboardFragmentIV1.setImageDrawable(null)
 
-
-
                     Toast.makeText(lazyActivity,"Upload Success!",Toast.LENGTH_SHORT).show()
+                    //asd(binding.dashboardFragmentIV1,storageReference)
+
+                    upload(imageUri!!,nowTime.toString())
                     true
                 }
 
@@ -185,7 +203,35 @@ class DashboardFragment : Fragment() {
 
         val dashBoardEditingRecyclerview = binding.dashboardEditingRecyclerview
         dashBoardEditingRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
-        dashBoardEditingRecyclerview.adapter = DashboardEditingAdapter(ContentsObject.contentsObjectList)
+
+        val dashboardEditingAdapter =  DashboardEditingAdapter(ContentsObject.contentsObjectList)
+
+
+        dashboardEditingAdapter.setItemClickListener(object :DashboardEditingAdapter.OnItemClickListener{
+            override fun onClick(
+                v: View,
+                position: Int,
+                id: Long,
+                count: Int,
+                kind: String,
+                location: String,
+                delete : Boolean
+            ) {
+                if (delete) {
+                    fbFirestore?.collection("contents")?.document(id.toString())?.delete()
+                } else {
+                    fbFirestore?.collection("contents")?.document(id.toString())?.update("kind", kind)
+                    fbFirestore?.collection("contents")?.document(id.toString())?.update("count", count)
+                    fbFirestore?.collection("contents")?.document(id.toString())?.update("location", location)
+                }
+            }
+        })
+
+
+        dashBoardEditingRecyclerview.adapter = dashboardEditingAdapter
+
+
+
 
         return root
     }
@@ -212,5 +258,24 @@ class DashboardFragment : Fragment() {
     fun clearValue(textInputEditText: TextInputEditText) {
         textInputEditText.setText("")
     }
+
+
+    private fun upload(uri: Uri, id : String) {
+        val storage = Firebase.storage("gs://smart-refrigerator-82839.appspot.com")
+        val storageRef = storage.reference
+        val fileName = "$id.jpg"
+        val riversRef = storageRef.child("images/$fileName")
+
+        riversRef.putFile(uri)
+            .addOnProgressListener { taskSnapshot ->
+                val btf = taskSnapshot.bytesTransferred
+                val tbc = taskSnapshot.totalByteCount
+            }
+            .addOnFailureListener { Log.i("업로드 실패", "") }
+            .addOnSuccessListener { Log.i("업로드 성공", "") }
+    }
+
+
+
 
 }

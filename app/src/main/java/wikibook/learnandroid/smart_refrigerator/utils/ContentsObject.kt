@@ -17,8 +17,8 @@ object ContentsObject{
             fbFirestore.collection("contents")
                 .get()
                 .addOnSuccessListener { result ->
-                    //val resultReverse = result.reversed()
-                    for (document in result) {
+                    val resultReverse = result.reversed()
+                    for (document in resultReverse) {
                         Log.d("fbFirestore", "${document.id} => ${document.data}")
                         val documentId = document.id
                         val documentData = document.data

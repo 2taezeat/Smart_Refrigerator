@@ -91,6 +91,12 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
     }
 
 
+    fun updateReceiptsList(newlist: ArrayList<Contents>) {
+        contentSArrayList.clear()
+        contentSArrayList.addAll(newlist)
+        this.notifyDataSetChanged()
+
+    }
 
 }
 

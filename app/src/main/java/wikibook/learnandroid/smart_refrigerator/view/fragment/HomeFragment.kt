@@ -12,9 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.HomeAdapter
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentHomeBinding
-import wikibook.learnandroid.smart_refrigerator.repository.Contents
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.utils.ContentsObject
 import wikibook.learnandroid.smart_refrigerator.viewmodels.HomeViewModel
@@ -35,7 +36,6 @@ class HomeFragment() : Fragment() {
     }
 
     private val fbFirestore = FirebaseFirestore.getInstance()
-    var contentsList = arrayListOf<Contents>()
 
 
     override fun onCreateView(
@@ -60,6 +60,12 @@ class HomeFragment() : Fragment() {
 
         val homeRecyclerView = binding.homeRecyclerview
         homeRecyclerView.layoutManager = LinearLayoutManager(lazyActivity)
+
+
+        val storageReference = Firebase.storage.reference.child("images/").downloadUrl
+        Log.d("storageReference", "${storageReference}")
+
+
 
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
         binding.homeToolbar.setOnMenuItemClickListener {
@@ -87,6 +93,7 @@ class HomeFragment() : Fragment() {
 
                 R.id.home_menu_refresh -> {
                     ContentsObject.getContents(fbFirestore)
+                    homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"), ContentsObject.contentsObjectList)
                     true
                 }
 
@@ -141,4 +148,6 @@ class HomeFragment() : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

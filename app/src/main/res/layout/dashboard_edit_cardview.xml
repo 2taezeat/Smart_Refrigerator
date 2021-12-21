@@ -23,6 +23,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Apply"
+                android:textSize="11sp"
+                android:id="@+id/dashboard_edit_apply_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="13dp"
+                >
+
+
+            </Button>
+
 
             <ImageView
                 android:id="@+id/dashboard_editing_imageview"
@@ -40,7 +55,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.705"
+                app:layout_constraintWidth_percent="0.485"
                 app:layout_constraintStart_toEndOf="@+id/dashboard_editing_imageview"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="10dp"
