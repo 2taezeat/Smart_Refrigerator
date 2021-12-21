@@ -86,7 +86,7 @@ class HomeFragment() : Fragment() {
                 }
 
                 R.id.home_menu_refresh -> {
-                    //contentsList = getContents()
+                    ContentsObject.qwe(fbFirestore)
                     true
                 }
 
@@ -118,7 +118,9 @@ class HomeFragment() : Fragment() {
             Log.d("select", "${itemSelect}, ${sortSelect}, ${locationSelectList}")
 
             if (sortSelect.toString() == "Shelf Life") {
-                contentsList.sortBy { it.shelfTime }
+                ContentsObject.contentsObjectList.sortBy { it.shelfTime }
+            } else {
+                ContentsObject.contentsObjectList.sortByDescending { it.updateTime }
             }
 
             homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList, ContentsObject.contentsObjectList)
