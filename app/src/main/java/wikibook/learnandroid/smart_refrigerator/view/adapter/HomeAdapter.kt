@@ -29,8 +29,15 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
     }
 
     override fun onBindViewHolder(viewHolder: CustomViewHolder, i: Int) {
-        val imageUrl = imagesArrayList[i].imageUrl
-        //Log.d("imageUrl", "${imageUrl}")
+
+        var imageUrl : String?
+
+        if (imagesArrayList.isNotEmpty()) {
+            imageUrl = imagesArrayList[i].imageUrl
+        } else {
+            imageUrl = null
+        }
+
 
         if (searchItem.isBlank()) {
             viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind

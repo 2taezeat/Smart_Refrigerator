@@ -28,8 +28,6 @@ class DashboardEditingAdapter(val contentSArrayList : ArrayList<Contents>, val i
     // (4) setItemClickListener로 설정한 함수 실행
     private lateinit var itemClickListener : OnItemClickListener
 
-
-
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): DashboardEditingAdapter.CustomViewHolder {
         val bind = DataBindingUtil.inflate<DashboardEditCardviewBinding>(
             LayoutInflater.from(viewGroup.context),
@@ -45,7 +43,14 @@ class DashboardEditingAdapter(val contentSArrayList : ArrayList<Contents>, val i
         viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingLocation.setText(contentSArrayList[i].location)
         viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingCount.setText(contentSArrayList[i].count.toString())
 
-        val imageUrl = imagesArrayList[i].imageUrl
+        var imageUrl : String?
+
+        if (imagesArrayList.isNotEmpty()) {
+            imageUrl = imagesArrayList[i].imageUrl
+        } else {
+            imageUrl = null
+        }
+
         Glide.with(viewHolder.dashboardEditCardviewBinding.root.context)
             .load(imageUrl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)

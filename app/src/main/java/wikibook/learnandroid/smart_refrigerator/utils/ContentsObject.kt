@@ -53,6 +53,7 @@ object ContentsObject{
                                     .addOnSuccessListener { url ->
                                         Log.d("url", "${url}")
                                         tmpImage.add(ImageInfo(id = idString ,imageUrl = url.toString()))
+                                        tmpImage.sortByDescending { it.id }
                                     }
                                     .addOnFailureListener { exception ->
                                         Log.e("storageReference", "Exception: ${exception.message}")
@@ -67,11 +68,9 @@ object ContentsObject{
                     Log.d("fbFirestore", "Error getting documents: ", exception)
                 }
             contentsObjectList = tmpList
-            tmpImage.sortBy { it.id }
             imageList = tmpImage
         }
 
-        //imageList.sortBy { it.id }
     }
 
 }
