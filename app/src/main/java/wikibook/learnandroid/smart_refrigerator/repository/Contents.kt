@@ -9,6 +9,7 @@ data class Contents(
         val purchaseDate : String, // data
         val image : String,
         val memo : String,
-        val useAi : Boolean
+        val useAi : Boolean,
+        val id : Long // nowTime
 )
 

@@ -112,7 +112,8 @@ class DashboardFragment : Fragment() {
                         purchaseDate = purchaseDate,
                         image = image,
                         memo = memo,
-                        useAi = useAi
+                        useAi = useAi,
+                        id = nowTime
                     )
                     fbFirestore?.collection("contents")?.document(nowTime.toString())?.set(contentAdd)
 

@@ -11,8 +11,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.HomeAdapter
+import com.google.firebase.firestore.FirebaseFirestore
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentHomeBinding
+import wikibook.learnandroid.smart_refrigerator.repository.Contents
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
 import wikibook.learnandroid.smart_refrigerator.viewmodels.HomeViewModel
 
@@ -29,6 +31,50 @@ class HomeFragment() : Fragment() {
     private val binding get() = _binding!!
     private val lazyActivity by lazy {
         requireActivity()
+    }
+
+    private val fbFirestore = FirebaseFirestore.getInstance()
+    lateinit var contentsList : ArrayList<Contents>
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+        contentsList = arrayListOf<Contents>()
+        fbFirestore.collection("contents")
+            .get()
+            .addOnSuccessListener { result ->
+
+                val tmpList = arrayListOf<Contents>()
+
+                for (document in result) {
+                    Log.d("fbFirestore", "${document.id} => ${document.data}")
+                    val documentId = document.id
+                    val documentData = document.data
+
+
+                    tmpList.add(Contents(
+                        kind = documentData["kind"].toString(),
+                        location = documentData["location"].toString(),
+                        updateTime = documentData["updataTime"].toString(),
+                        count = documentData["count"].toString().toInt(),
+                        shelfTime = documentData["shelfTime"].toString(),
+                        purchaseDate = documentData["purchaseDate"].toString(),
+                        image = documentData["image"].toString(),
+                        memo = documentData["memo"].toString(),
+                        useAi = documentData["useAi"].toString().toBoolean(),
+                        id = documentData["id"].toString().toLong()
+                    ))
+                }
+                Log.d("contentsList2", "${tmpList}")
+                contentsList.addAll(tmpList)
+
+            }
+            .addOnFailureListener { exception ->
+                Log.d("fbFirestore", "Error getting documents: ", exception)
+            }
+
     }
 
     override fun onCreateView(
@@ -56,12 +102,16 @@ class HomeFragment() : Fragment() {
         homeRecyclerView.layoutManager = LinearLayoutManager(lazyActivity)
 
         if (locationArrayBundle == null) {
-            homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"))
+            homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"), contentsList)
         } else {
-            homeRecyclerView.adapter = HomeAdapter("","", locationArrayBundle)
+            homeRecyclerView.adapter = HomeAdapter("","", locationArrayBundle, contentsList)
         }
 
 
+
+
+
+        Log.d("contentsList", "${contentsList}")
 
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
         binding.homeToolbar.setOnMenuItemClickListener {
@@ -86,6 +136,10 @@ class HomeFragment() : Fragment() {
                         homeContentLayout.layoutParams = params
                     }
 
+                    true
+                }
+
+                R.id.home_menu_refresh -> {
                     true
                 }
 
@@ -115,13 +169,26 @@ class HomeFragment() : Fragment() {
             if (binding.homeChipH.isChecked) locationSelectList.add("H")
 
 
+            Log.d("contentsList3", "${contentsList}")
+
+
             Log.d("select", "${itemSelect}, ${sortSelect}, ${locationSelectList}")
 
             //val dataArray = arrayOf( "2010/03/25", "2011/03/25", "2012/03/25", "2010/02/25", "2010/02/28", "2009/12/25", "2030/01/01", "1999/03/25" )
             //dataArray.sort()
 
+            if (sortSelect.toString() == "Shelf Life") {
 
-            homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList)
+            } else if (sortSelect.toString() == "update Time") {
+
+            } else {
+
+            }
+
+
+
+
+            homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList, contentsList)
 
         }
 
