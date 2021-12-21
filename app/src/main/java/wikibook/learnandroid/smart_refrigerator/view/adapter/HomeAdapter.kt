@@ -1,6 +1,5 @@
 package com.ebookfrenzy.carddemo
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +14,6 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
         : RecyclerView.ViewHolder(homeCardviewBinding.root)
 
 
-
-
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): HomeAdapter.CustomViewHolder {
         val bind = DataBindingUtil.inflate<HomeCardviewBinding>(
             LayoutInflater.from(viewGroup.context),
@@ -29,22 +26,6 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
     }
 
     override fun onBindViewHolder(viewHolder: CustomViewHolder, i: Int) {
-        //viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingKind.text = titles[i]
-        //viewHolder.homeCardviewBinding.dashboardEdittextEditingKind.setText(titles[i])
-        //viewHolder.notificationsCardviewBinding.itemImage.setImageResource(images[i])
-
-
-//        viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind
-//        viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location
-//        viewHolder.homeCardviewBinding.homeShelflifeTextview.text = contentSArrayList[i].shelfTime
-//        viewHolder.homeCardviewBinding.homeUpdateTextview.text = contentSArrayList[i].updateTime
-//        viewHolder.homeCardviewBinding.homePurchaseTextview.text = contentSArrayList[i].purchaseDate
-//        viewHolder.homeCardviewBinding.homeMemoTextview.text = contentSArrayList[i].memo
-//        viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
-
-        Log.d("select2", "${selectLocationArray}")
-
-
         if (searchItem.isBlank()) {
             viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind
             viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location

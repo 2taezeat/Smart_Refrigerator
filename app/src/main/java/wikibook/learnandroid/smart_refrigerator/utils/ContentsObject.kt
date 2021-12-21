@@ -11,7 +11,7 @@ import wikibook.learnandroid.smart_refrigerator.repository.Contents
 object ContentsObject{
     var contentsObjectList = ArrayList<Contents>()
 
-    fun qwe(fbFirestore : FirebaseFirestore) {
+    fun getContents(fbFirestore : FirebaseFirestore) {
         val tmpList = arrayListOf<Contents>()
         CoroutineScope(Dispatchers.IO).launch {
             fbFirestore.collection("contents")

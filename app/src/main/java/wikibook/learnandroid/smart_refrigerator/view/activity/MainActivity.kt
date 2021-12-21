@@ -75,22 +75,13 @@ class MainActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
 
-        ContentsObject.qwe(fbFirestore)
+        ContentsObject.getContents(fbFirestore)
 
 
 
 
 
     }
-
-
-
-
-//
-//    firestore?.collection(auth!!.currentUser!!.uid)?.document()?.set(resultDTO)
-//    Toast.makeText(this,"저장완료",Toast.LENGTH_SHORT).show()
-
-
 
 
     // 카메라 촬영

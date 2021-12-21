@@ -25,6 +25,7 @@ import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentDashboardBinding
 import wikibook.learnandroid.smart_refrigerator.repository.Contents
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
+import wikibook.learnandroid.smart_refrigerator.utils.ContentsObject
 import wikibook.learnandroid.smart_refrigerator.view.activity.MainActivity
 import wikibook.learnandroid.smart_refrigerator.viewmodels.DashboardViewModel
 import java.text.SimpleDateFormat
@@ -117,6 +118,7 @@ class DashboardFragment : Fragment() {
                     )
                     fbFirestore?.collection("contents")?.document(nowTime.toString())?.set(contentAdd)
 
+
                     clearValue(binding.dashboardEdittextKind)
                     clearValue(binding.dashboardEdittextLocation)
                     clearValue(binding.dashboardEdittextCount)
@@ -183,7 +185,7 @@ class DashboardFragment : Fragment() {
 
         val dashBoardEditingRecyclerview = binding.dashboardEditingRecyclerview
         dashBoardEditingRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
-        dashBoardEditingRecyclerview.adapter = DashboardEditingAdapter()
+        dashBoardEditingRecyclerview.adapter = DashboardEditingAdapter(ContentsObject.contentsObjectList)
 
         return root
     }

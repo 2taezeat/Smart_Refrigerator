@@ -6,22 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.DashboardEditCardviewBinding
+import wikibook.learnandroid.smart_refrigerator.repository.Contents
 
-class DashboardEditingAdapter() : RecyclerView.Adapter<DashboardEditingAdapter.CustomViewHolder>() {
+class DashboardEditingAdapter(val contentSArrayList : ArrayList<Contents>) : RecyclerView.Adapter<DashboardEditingAdapter.CustomViewHolder>() {
     inner class CustomViewHolder(val dashboardEditCardviewBinding: DashboardEditCardviewBinding)
         : RecyclerView.ViewHolder(dashboardEditCardviewBinding.root)
 
-    private val titles = arrayOf("Chapter One",
-        "Chapter Two", "Chapter Three", "Chapter Four",
-        "Chapter Five", "Chapter Six", "Chapter Seven",
-        "Chapter Eight")
-
-    private val details = arrayOf("Item one details", "Item two details",
-        "Item three details", "Item four details",
-        "Item five details", "Item six details",
-        "Item seven details", "Item eight details")
-
-    private val images = intArrayOf(1,2,3,4,5,6,7,8)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): DashboardEditingAdapter.CustomViewHolder {
         val bind = DataBindingUtil.inflate<DashboardEditCardviewBinding>(
@@ -34,12 +24,12 @@ class DashboardEditingAdapter() : RecyclerView.Adapter<DashboardEditingAdapter.C
     }
 
     override fun onBindViewHolder(viewHolder: CustomViewHolder, i: Int) {
-        //viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingKind.text = titles[i]
-        viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingKind.setText(titles[i])
-        //viewHolder.notificationsCardviewBinding.itemImage.setImageResource(images[i])
+        viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingKind.setText(contentSArrayList[i].kind)
+        viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingLocation.setText(contentSArrayList[i].location)
+        viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingCount.setText(contentSArrayList[i].count.toString())
     }
 
     override fun getItemCount(): Int {
-        return titles.size
+        return contentSArrayList.size
     }
 }

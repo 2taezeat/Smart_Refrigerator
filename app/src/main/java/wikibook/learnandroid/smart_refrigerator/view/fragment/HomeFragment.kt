@@ -73,12 +73,12 @@ class HomeFragment() : Fragment() {
                     if (binding.homeSearchCl.visibility == View.VISIBLE) {
                         binding.homeSearchCl.visibility = View.GONE
                         val params: ViewGroup.LayoutParams = homeContentLayout.layoutParams
-                        params.height = 1800
+                        params.height = 2350
                         homeContentLayout.layoutParams = params
                     } else {
                         binding.homeSearchCl.visibility = View.VISIBLE
                         val params: ViewGroup.LayoutParams = homeContentLayout.layoutParams
-                        params.height = 1300
+                        params.height = 1750
                         homeContentLayout.layoutParams = params
                     }
 
@@ -86,7 +86,7 @@ class HomeFragment() : Fragment() {
                 }
 
                 R.id.home_menu_refresh -> {
-                    ContentsObject.qwe(fbFirestore)
+                    ContentsObject.getContents(fbFirestore)
                     true
                 }
 
