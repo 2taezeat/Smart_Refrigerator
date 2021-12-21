@@ -204,7 +204,7 @@ class DashboardFragment : Fragment() {
         val dashBoardEditingRecyclerview = binding.dashboardEditingRecyclerview
         dashBoardEditingRecyclerview.layoutManager = LinearLayoutManager(lazyActivity)
 
-        val dashboardEditingAdapter =  DashboardEditingAdapter(ContentsObject.contentsObjectList)
+        val dashboardEditingAdapter =  DashboardEditingAdapter(ContentsObject.contentsObjectList , ContentsObject.imageList)
 
 
         dashboardEditingAdapter.setItemClickListener(object :DashboardEditingAdapter.OnItemClickListener{
@@ -219,6 +219,17 @@ class DashboardFragment : Fragment() {
             ) {
                 if (delete) {
                     fbFirestore?.collection("contents")?.document(id.toString())?.delete()
+                    val storageRef = Firebase.storage.reference
+                    val deleteRef = storageRef.child("images/${id.toString()}.jpg")
+                    deleteRef.delete()
+                        .addOnSuccessListener { url ->
+                            Log.e("delete success", "delete success")
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.e("storageReference", "Exception: ${exception.message}")
+                        }
+
+
                 } else {
                     fbFirestore?.collection("contents")?.document(id.toString())?.update("kind", kind)
                     fbFirestore?.collection("contents")?.document(id.toString())?.update("count", count)

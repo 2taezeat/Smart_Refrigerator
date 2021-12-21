@@ -42,7 +42,7 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_refrigerator_bottom_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/home_cardview.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/home_items.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/home_items.xml" value="0.33" />
         <entry key="app/src/main/res/layout/notifications_cardview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/sort_item.xml" value="0.33596491228070174" />
         <entry key="app/src/main/res/layout/test.xml" value="0.25" />

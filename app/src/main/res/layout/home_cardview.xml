@@ -31,9 +31,10 @@
 
 
             <ImageView
-                android:id="@+id/dashboard_editing_imageview"
+                android:id="@+id/home_content_imageview"
                 android:layout_width="170dp"
                 android:layout_height="154dp"
+                android:scaleType="fitXY"
                 android:background="@color/teal_200"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"

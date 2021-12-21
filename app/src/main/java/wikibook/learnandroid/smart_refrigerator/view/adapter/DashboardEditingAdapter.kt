@@ -5,11 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.DashboardEditCardviewBinding
 import wikibook.learnandroid.smart_refrigerator.repository.Contents
+import wikibook.learnandroid.smart_refrigerator.repository.ImageInfo
 
-class DashboardEditingAdapter(val contentSArrayList : ArrayList<Contents>) : RecyclerView.Adapter<DashboardEditingAdapter.CustomViewHolder>() {
+
+class DashboardEditingAdapter(val contentSArrayList : ArrayList<Contents>, val imagesArrayList : ArrayList<ImageInfo>) : RecyclerView.Adapter<DashboardEditingAdapter.CustomViewHolder>() {
     inner class CustomViewHolder(val dashboardEditCardviewBinding: DashboardEditCardviewBinding)
         : RecyclerView.ViewHolder(dashboardEditCardviewBinding.root)
 
@@ -41,6 +45,12 @@ class DashboardEditingAdapter(val contentSArrayList : ArrayList<Contents>) : Rec
         viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingLocation.setText(contentSArrayList[i].location)
         viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingCount.setText(contentSArrayList[i].count.toString())
 
+        val imageUrl = imagesArrayList[i].imageUrl
+        Glide.with(viewHolder.dashboardEditCardviewBinding.root.context)
+            .load(imageUrl)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(viewHolder.dashboardEditCardviewBinding.dashboardEditingImageview) // Glide를 사용하여 이미지 로드
+
         viewHolder.dashboardEditCardviewBinding.dashboardEditApplyButton.setOnClickListener {
 
             val editKind = viewHolder.dashboardEditCardviewBinding.dashboardEdittextEditingKind.text.toString()
@@ -56,4 +66,14 @@ class DashboardEditingAdapter(val contentSArrayList : ArrayList<Contents>) : Rec
     override fun getItemCount(): Int {
         return contentSArrayList.size
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+
 }

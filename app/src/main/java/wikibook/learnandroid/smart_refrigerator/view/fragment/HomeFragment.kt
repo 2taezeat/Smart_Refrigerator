@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebookfrenzy.carddemo.HomeAdapter
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -36,6 +37,7 @@ class HomeFragment() : Fragment() {
     }
 
     private val fbFirestore = FirebaseFirestore.getInstance()
+    private var fbAuth : FirebaseAuth? = null
 
 
     override fun onCreateView(
@@ -61,9 +63,16 @@ class HomeFragment() : Fragment() {
         val homeRecyclerView = binding.homeRecyclerview
         homeRecyclerView.layoutManager = LinearLayoutManager(lazyActivity)
 
+        fbAuth = FirebaseAuth.getInstance()
 
-        val storageReference = Firebase.storage.reference.child("images/").downloadUrl
-        Log.d("storageReference", "${storageReference}")
+        val storageRef = Firebase.storage.reference
+        storageRef.child("images/1640087020945.jpg").downloadUrl
+            .addOnSuccessListener { url ->
+                Log.d("storageReference", "${url}")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("storageReference", "Exception: ${exception.message}")
+            }
 
 
 
@@ -93,15 +102,12 @@ class HomeFragment() : Fragment() {
 
                 R.id.home_menu_refresh -> {
                     ContentsObject.getContents(fbFirestore)
-                    homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"), ContentsObject.contentsObjectList)
                     true
                 }
 
                 else -> false
             }
         }
-
-
 
         val sortMenus = listOf("Shelf Life", "Update Time")
         val sortAdapter = ArrayAdapter(lazyActivity, R.layout.sort_item, sortMenus)
@@ -130,14 +136,14 @@ class HomeFragment() : Fragment() {
                 ContentsObject.contentsObjectList.sortByDescending { it.updateTime }
             }
 
-            homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList, ContentsObject.contentsObjectList)
+            homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList, ContentsObject.contentsObjectList, ContentsObject.imageList)
         }
 
 
         if (locationArrayBundle == null) {
-            homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"), ContentsObject.contentsObjectList)
+            homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"), ContentsObject.contentsObjectList, ContentsObject.imageList)
         } else {
-            homeRecyclerView.adapter = HomeAdapter("","", locationArrayBundle, ContentsObject.contentsObjectList)
+            homeRecyclerView.adapter = HomeAdapter("","", locationArrayBundle, ContentsObject.contentsObjectList, ContentsObject.imageList)
         }
 
 
