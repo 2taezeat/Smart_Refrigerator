@@ -16,6 +16,7 @@ import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.FragmentHomeBinding
 import wikibook.learnandroid.smart_refrigerator.repository.Contents
 import wikibook.learnandroid.smart_refrigerator.utils.BottomDialogShow
+import wikibook.learnandroid.smart_refrigerator.utils.ContentsObject
 import wikibook.learnandroid.smart_refrigerator.viewmodels.HomeViewModel
 
 
@@ -34,48 +35,8 @@ class HomeFragment() : Fragment() {
     }
 
     private val fbFirestore = FirebaseFirestore.getInstance()
-    lateinit var contentsList : ArrayList<Contents>
+    var contentsList = arrayListOf<Contents>()
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-        contentsList = arrayListOf<Contents>()
-        fbFirestore.collection("contents")
-            .get()
-            .addOnSuccessListener { result ->
-
-                val tmpList = arrayListOf<Contents>()
-
-                for (document in result) {
-                    Log.d("fbFirestore", "${document.id} => ${document.data}")
-                    val documentId = document.id
-                    val documentData = document.data
-
-
-                    tmpList.add(Contents(
-                        kind = documentData["kind"].toString(),
-                        location = documentData["location"].toString(),
-                        updateTime = documentData["updataTime"].toString(),
-                        count = documentData["count"].toString().toInt(),
-                        shelfTime = documentData["shelfTime"].toString(),
-                        purchaseDate = documentData["purchaseDate"].toString(),
-                        image = documentData["image"].toString(),
-                        memo = documentData["memo"].toString(),
-                        useAi = documentData["useAi"].toString().toBoolean(),
-                        id = documentData["id"].toString().toLong()
-                    ))
-                }
-                Log.d("contentsList2", "${tmpList}")
-                contentsList.addAll(tmpList)
-
-            }
-            .addOnFailureListener { exception ->
-                Log.d("fbFirestore", "Error getting documents: ", exception)
-            }
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -88,10 +49,9 @@ class HomeFragment() : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
+
+        homeViewModel =
+            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         val homeContentLayout = binding.homeContentCl
 
@@ -100,18 +60,6 @@ class HomeFragment() : Fragment() {
 
         val homeRecyclerView = binding.homeRecyclerview
         homeRecyclerView.layoutManager = LinearLayoutManager(lazyActivity)
-
-        if (locationArrayBundle == null) {
-            homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"), contentsList)
-        } else {
-            homeRecyclerView.adapter = HomeAdapter("","", locationArrayBundle, contentsList)
-        }
-
-
-
-
-
-        Log.d("contentsList", "${contentsList}")
 
         binding.homeToolbar.inflateMenu(R.menu.home_toolbar_menu)
         binding.homeToolbar.setOnMenuItemClickListener {
@@ -124,13 +72,11 @@ class HomeFragment() : Fragment() {
                 R.id.home_menu_search -> {
                     if (binding.homeSearchCl.visibility == View.VISIBLE) {
                         binding.homeSearchCl.visibility = View.GONE
-                        //val homeContentLayout = binding.homeContentCl
                         val params: ViewGroup.LayoutParams = homeContentLayout.layoutParams
                         params.height = 1800
                         homeContentLayout.layoutParams = params
                     } else {
                         binding.homeSearchCl.visibility = View.VISIBLE
-                        //val homeContentLayout = binding.homeContentCl
                         val params: ViewGroup.LayoutParams = homeContentLayout.layoutParams
                         params.height = 1300
                         homeContentLayout.layoutParams = params
@@ -140,6 +86,7 @@ class HomeFragment() : Fragment() {
                 }
 
                 R.id.home_menu_refresh -> {
+                    //contentsList = getContents()
                     true
                 }
 
@@ -168,29 +115,22 @@ class HomeFragment() : Fragment() {
             if (binding.homeChipG.isChecked) locationSelectList.add("G")
             if (binding.homeChipH.isChecked) locationSelectList.add("H")
 
-
-            Log.d("contentsList3", "${contentsList}")
-
-
             Log.d("select", "${itemSelect}, ${sortSelect}, ${locationSelectList}")
 
-            //val dataArray = arrayOf( "2010/03/25", "2011/03/25", "2012/03/25", "2010/02/25", "2010/02/28", "2009/12/25", "2030/01/01", "1999/03/25" )
-            //dataArray.sort()
-
             if (sortSelect.toString() == "Shelf Life") {
-
-            } else if (sortSelect.toString() == "update Time") {
-
-            } else {
-
+                contentsList.sortBy { it.shelfTime }
             }
 
-
-
-
-            homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList, contentsList)
-
+            homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList, ContentsObject.contentsObjectList)
         }
+
+
+        if (locationArrayBundle == null) {
+            homeRecyclerView.adapter = HomeAdapter("","", arrayListOf<String>("All","A","B","C","D","E","F","G","H"), ContentsObject.contentsObjectList)
+        } else {
+            homeRecyclerView.adapter = HomeAdapter("","", locationArrayBundle, ContentsObject.contentsObjectList)
+        }
+
 
         return root
     }
@@ -199,6 +139,4 @@ class HomeFragment() : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

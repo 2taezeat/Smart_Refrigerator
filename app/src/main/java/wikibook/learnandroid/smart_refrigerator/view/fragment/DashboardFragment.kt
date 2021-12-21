@@ -95,7 +95,7 @@ class DashboardFragment : Fragment() {
 
                     val kind = binding.dashboardEdittextKind.text.toString()
                     val location = binding.dashboardEdittextLocation.text.toString()
-                    val updateTime = dateFormat.format(date) // 현재 시간을 dateFormat 에 선언한 형태의 String 으로 변환
+                    val updateTime = dateFormat.format(date).toString() // 현재 시간을 dateFormat 에 선언한 형태의 String 으로 변환
                     val count = binding.dashboardEdittextCount.text.toString().toInt()
                     val shelfTime = binding.dashboardEdittextShelflife.text.toString()
                     val purchaseDate = binding.dashboardEdittextPurchasingtime.text.toString()

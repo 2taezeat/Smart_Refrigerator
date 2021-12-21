@@ -27,6 +27,7 @@ import com.gun0912.tedpermission.TedPermission
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.ActivityMainBinding
 import wikibook.learnandroid.smart_refrigerator.repository.NotificationInfoDatabase
+import wikibook.learnandroid.smart_refrigerator.utils.ContentsObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db: NotificationInfoDatabase
     private var auth : FirebaseAuth? = null
     private var firestore : FirebaseFirestore? = null
+    val fbFirestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +73,9 @@ class MainActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+
+
+        ContentsObject.qwe(fbFirestore)
 
 
 

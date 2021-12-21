@@ -1,5 +1,6 @@
 package com.ebookfrenzy.carddemo
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +15,6 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
         : RecyclerView.ViewHolder(homeCardviewBinding.root)
 
 
-    private val locationArray = arrayOf( "A", "B", "C", "C", "B", "A", "B", "A" )
-    private val kindArray = arrayOf( "Apple", "asd", "ASD", "asD", "Bannna", "Apple", "apple", "cccc" )
-    private val dataArray = arrayOf( "2010-03-25", "2011-03-25", "2012-03-25", "2010-02-25", "2010-02-28", "2009-12-25", "2030-01-01", "1999-03-25" )
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): HomeAdapter.CustomViewHolder {
@@ -26,6 +24,7 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
             viewGroup,
             false
         )
+
         return CustomViewHolder(bind)
     }
 
@@ -35,18 +34,34 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
         //viewHolder.notificationsCardviewBinding.itemImage.setImageResource(images[i])
 
 
-        viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind
-        viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location
-        viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location
+//        viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind
+//        viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location
+//        viewHolder.homeCardviewBinding.homeShelflifeTextview.text = contentSArrayList[i].shelfTime
+//        viewHolder.homeCardviewBinding.homeUpdateTextview.text = contentSArrayList[i].updateTime
+//        viewHolder.homeCardviewBinding.homePurchaseTextview.text = contentSArrayList[i].purchaseDate
+//        viewHolder.homeCardviewBinding.homeMemoTextview.text = contentSArrayList[i].memo
+//        viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
+
+        Log.d("select2", "${selectLocationArray}")
 
 
         if (searchItem.isBlank()) {
-            viewHolder.homeCardviewBinding.homeKindTextview.text = kindArray[i]
-            viewHolder.homeCardviewBinding.homeLocationTextview.text = locationArray[i]
+            viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind
+            viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location
+            viewHolder.homeCardviewBinding.homeShelflifeTextview.text = contentSArrayList[i].shelfTime
+            viewHolder.homeCardviewBinding.homeUpdateTextview.text = contentSArrayList[i].updateTime
+            viewHolder.homeCardviewBinding.homePurchaseTextview.text = contentSArrayList[i].purchaseDate
+            viewHolder.homeCardviewBinding.homeMemoTextview.text = contentSArrayList[i].memo
+            viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
         } else {
-            if (searchItem.lowercase() == kindArray[i].lowercase()) {
-                viewHolder.homeCardviewBinding.homeKindTextview.text = kindArray[i]
-                viewHolder.homeCardviewBinding.homeLocationTextview.text = locationArray[i]
+            if (searchItem.lowercase() == contentSArrayList[i].kind.lowercase()) {
+                viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind
+                viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location
+                viewHolder.homeCardviewBinding.homeShelflifeTextview.text = contentSArrayList[i].shelfTime
+                viewHolder.homeCardviewBinding.homeUpdateTextview.text = contentSArrayList[i].updateTime
+                viewHolder.homeCardviewBinding.homePurchaseTextview.text = contentSArrayList[i].purchaseDate
+                viewHolder.homeCardviewBinding.homeMemoTextview.text = contentSArrayList[i].memo
+                viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
             } else {
                 viewHolder.homeCardviewBinding.homeCardViewMain.visibility = View.INVISIBLE
                 viewHolder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
@@ -58,28 +73,44 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
             viewHolder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
         }
         else if (selectLocationArray[0] == "All" ) {
-            viewHolder.homeCardviewBinding.homeKindTextview.text = kindArray[i]
-            viewHolder.homeCardviewBinding.homeLocationTextview.text = locationArray[i]
+            viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind
+            viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location
+            viewHolder.homeCardviewBinding.homeShelflifeTextview.text = contentSArrayList[i].shelfTime
+            viewHolder.homeCardviewBinding.homeUpdateTextview.text = contentSArrayList[i].updateTime
+            viewHolder.homeCardviewBinding.homePurchaseTextview.text = contentSArrayList[i].purchaseDate
+            viewHolder.homeCardviewBinding.homeMemoTextview.text = contentSArrayList[i].memo
+            viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
         } else {
-            if (selectLocationArray.contains(locationArray[i])) {
-                viewHolder.homeCardviewBinding.homeKindTextview.text = kindArray[i]
-                viewHolder.homeCardviewBinding.homeLocationTextview.text = locationArray[i]
+            if (selectLocationArray.contains(contentSArrayList[i].location)) {
+                viewHolder.homeCardviewBinding.homeKindTextview.text = contentSArrayList[i].kind
+                viewHolder.homeCardviewBinding.homeLocationTextview.text = contentSArrayList[i].location
+                viewHolder.homeCardviewBinding.homeShelflifeTextview.text = contentSArrayList[i].shelfTime
+                viewHolder.homeCardviewBinding.homeUpdateTextview.text = contentSArrayList[i].updateTime
+                viewHolder.homeCardviewBinding.homePurchaseTextview.text = contentSArrayList[i].purchaseDate
+                viewHolder.homeCardviewBinding.homeMemoTextview.text = contentSArrayList[i].memo
+                viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
             } else {
                 viewHolder.homeCardviewBinding.homeCardViewMain.visibility = View.INVISIBLE
                 viewHolder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
             }
-
-
         }
-
-        //if (locationArray[i] == )
-
 
     }
 
     override fun getItemCount(): Int {
         return contentSArrayList.size
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+
+
 }
 
 
