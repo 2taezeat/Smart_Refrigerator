@@ -132,8 +132,10 @@ class HomeFragment() : Fragment() {
 
             if (sortSelect.toString() == "Shelf Life") {
                 ContentsObject.contentsObjectList.sortBy { it.shelfTime }
+                ContentsObject.imageList.sortBy { it.shelfTime }
             } else {
                 ContentsObject.contentsObjectList.sortByDescending { it.updateTime }
+                ContentsObject.imageList.sortByDescending { it.id }
             }
 
             homeRecyclerView.adapter = HomeAdapter(itemSelect.toString(), sortSelect.toString(), locationSelectList, ContentsObject.contentsObjectList, ContentsObject.imageList)

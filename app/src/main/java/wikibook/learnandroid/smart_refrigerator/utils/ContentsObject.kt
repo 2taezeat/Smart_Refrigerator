@@ -47,19 +47,20 @@ object ContentsObject{
 
                         Log.d("url_id", "${documentData["id"].toString()}")
                         CoroutineScope(Dispatchers.IO).launch {
-                            val job1 = launch {
+                            val imageUrlGetJob = launch {
                                 val idString = documentData["id"].toString()
+                                val shelfTimeString = documentData["shelfTime"].toString()
                                 storageRef.child("images/${idString}.jpg").downloadUrl
                                     .addOnSuccessListener { url ->
                                         Log.d("url", "${url}")
-                                        tmpImage.add(ImageInfo(id = idString ,imageUrl = url.toString()))
+                                        tmpImage.add(ImageInfo(id = idString ,shelfTime = shelfTimeString ,imageUrl = url.toString()))
                                         tmpImage.sortByDescending { it.id }
                                     }
                                     .addOnFailureListener { exception ->
                                         Log.e("storageReference", "Exception: ${exception.message}")
                                     }
                             }
-                            job1.join()
+                            imageUrlGetJob.join()
                         }
 
                     }

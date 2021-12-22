@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import wikibook.learnandroid.smart_refrigerator.R
 import wikibook.learnandroid.smart_refrigerator.databinding.HomeCardviewBinding
 import wikibook.learnandroid.smart_refrigerator.repository.Contents
@@ -49,7 +48,7 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
             viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
             Glide.with(viewHolder.homeCardviewBinding.root.context)
                 .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                //.diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.homeCardviewBinding.homeContentImageview) // Glide를 사용하여 이미지 로드
         } else {
             if (searchItem.lowercase() == contentSArrayList[i].kind.lowercase()) {
@@ -62,7 +61,7 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
                 viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
                 Glide.with(viewHolder.homeCardviewBinding.root.context)
                     .load(imageUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    //.diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(viewHolder.homeCardviewBinding.homeContentImageview) // Glide를 사용하여 이미지 로드
             } else {
                 viewHolder.homeCardviewBinding.homeCardViewMain.visibility = View.INVISIBLE
@@ -84,7 +83,7 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
             viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
             Glide.with(viewHolder.homeCardviewBinding.root.context)
                 .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                //.diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.homeCardviewBinding.homeContentImageview) // Glide를 사용하여 이미지 로드
         } else {
             if (selectLocationArray.contains(contentSArrayList[i].location)) {
@@ -97,7 +96,7 @@ class HomeAdapter(val searchItem : String, val sortMethod : String, val selectLo
                 viewHolder.homeCardviewBinding.homeCountTextview.text = contentSArrayList[i].count.toString()
                 Glide.with(viewHolder.homeCardviewBinding.root.context)
                     .load(imageUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    //.diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(viewHolder.homeCardviewBinding.homeContentImageview) // Glide를 사용하여 이미지 로드
             } else {
                 viewHolder.homeCardviewBinding.homeCardViewMain.visibility = View.INVISIBLE

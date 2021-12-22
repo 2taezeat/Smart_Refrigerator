@@ -96,7 +96,7 @@ class NotificationsFragment : Fragment() {
 //            NotificationInfo(
 //                notificationCategory = "N3",
 //                kind = "milk",
-//                location = "D",
+//                location = "B",
 //                notificationBody = "The shelf life of the \"milk\"(2) in \"D\" is imminent.",
 //                notificationTime = "2021-09-22 09:12:34",
 //                count = 3
